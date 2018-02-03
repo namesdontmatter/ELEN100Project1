@@ -28,8 +28,8 @@ format long; format compact;
 
 % These Ideal Design element values are fixed in the circuit.
 VG  =  ?;                   % Generator voltage
-R1_ideal =      ?          ;    % Ohms
-R2_ideal =      ?          ;    % Ohms
+R1_ideal =      1250          ;    % Ohms
+R2_ideal =      1333.3       ;    % Ohms
 C1_ideal =      ?          ;    % Farads
 C2_ideal =      ?          ;    % Farads
 
