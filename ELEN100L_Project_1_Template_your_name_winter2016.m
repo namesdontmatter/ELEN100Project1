@@ -28,10 +28,10 @@ format long; format compact;
 
 % These Ideal Design element values are fixed in the circuit.
 VG  =  ?;                   % Generator voltage
-R1_ideal =      1250          ;    % Ohms
-R2_ideal =      1333.3       ;    % Ohms
-C1_ideal =      ?          ;    % Farads
-C2_ideal =      ?          ;    % Farads
+R1_ideal =      1250       ;    % Ohms
+R2_ideal =      1333.33    ;    % Ohms
+C1_ideal =      0.1*10^-6  ;    % Farads
+C2_ideal =      0.1*10^-6  ;    % Farads
 
 % These Actual Design element values are fixed in the circuit.
 R1_actual =    ?       ;   % Ohms
@@ -40,10 +40,10 @@ C1_actual =    ?       ;   % Farads
 C2_actual =    ?       ;   % Farads
 
 % Setup values for the poles.
-w0 =     ?   ;        % Radians/Second
-w1 =     ?   ;        % Radians/Second
-f0 =     ?   ;        % Hertz
-f1 =     ?   ;        % Hertz
+w0 =     3000   ;        % Radians/Second
+w1 =     20000   ;        % Radians/Second
+f0 =     (3000/6.28)   ;        % Hertz
+f1 =     (20000/6.28)   ;        % Hertz
 
 % Build an array for the angular frequency and convert it to Hertz.
 dw = 10;                   % Step size for analysis
@@ -73,35 +73,35 @@ fignum = fignum+1;
 
 display(' ');
 display('The Ideal Design component values are:');
-fprintf('    R1 = %+11.4f Ohms.\n',  ?  );
-fprintf('    R2 = %+11.4f Ohms.\n',  ?  );
-fprintf('    C1 = %+11.4e Farads.\n', ?  );
-fprintf('    C2 = %+11.4e Farads.\n', ?  );
+fprintf('    R1 = %+11.4f Ohms.\n',  R1_ideal  );
+fprintf('    R2 = %+11.4f Ohms.\n',  R2_ideal  );
+fprintf('    C1 = %+11.4e Farads.\n', C1_ideal  );
+fprintf('    C2 = %+11.4e Farads.\n', C2_ideal  );
 
 display(' ');
 display('The Actual Design component values are:');
-fprintf('    R1 = %+11.4f Ohms.\n',  ?  );
-fprintf('    R2 = %+11.4f Ohms.\n',  ?  );
-fprintf('    C1 = %+11.4e Farads.\n', ? );
-fprintf('    C2 = %+11.4e Farads.\n', ? );
+fprintf('    R1 = %+11.4f Ohms.\n',  R1_actual  );
+fprintf('    R2 = %+11.4f Ohms.\n',  R2_actual  );
+fprintf('    C1 = %+11.4e Farads.\n', C1_actual );
+fprintf('    C2 = %+11.4e Farads.\n', C2_actual );
 
 %%
 % Compute the percent differences between the Ideal and Actual design
 % component values.
 %
 
-diff_R1_ideal_actual = ( ?? )/abs(R1_ideal)*100;
-diff_R2_ideal_actual = ( ?? )/abs(R2_ideal)*100;
-diff_C1_ideal_actual = ( ?? )/abs(C1_ideal)*100;
-diff_C2_ideal_actual = ( ?? )/abs(C2_ideal)*100;
+diff_R1_ideal_actual = ( R1_actual - R1_ideal )/abs(R1_ideal)*100;
+diff_R2_ideal_actual = ( R2_actual - R2_ideal )/abs(R2_ideal)*100;
+diff_C1_ideal_actual = ( C1_actual - C1_ideal )/abs(C1_ideal)*100;
+diff_C2_ideal_actual = ( C2_actual - C2_ideal )/abs(C2_ideal)*100;
 
 display(' ');
 display('The percent difference between Ideal and Actual design');
 display('component values:');
 fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_ideal_actual );
-fprintf('    %% diff R2 = %+8.4f (%%).\n', ? );
-fprintf('    %% diff C1 = %+8.4f (%%).\n', ? );
-fprintf('    %% diff C2 = %+8.4f (%%).\n', ? );
+fprintf('    %% diff R2 = %+8.4f (%%).\n', diff_R2_ideal_actual );
+fprintf('    %% diff C1 = %+8.4f (%%).\n', diff_C1_ideal_actual );
+fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_ideal_actual );
 
 %%
 % Display the poles for the target circuit design transfer function.
@@ -124,17 +124,37 @@ G1_ideal = [ ...
       (-1/R1_ideal)  (1/R1_ideal + 1/R2_ideal)   (-1/R2_ideal); ...
       (0)            (-1/R2_ideal)               (1/R2_ideal)];
 
-G2_ideal = [ ??? ];
+G2_ideal = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (C1_ideal)                  (0); ...
+      (0)            (0)                         (C2_ideal)];
 
-G3_ideal = [ ??? ];
 
-G1_actual = [ ??? ];
+G3_ideal = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0)];
 
-G2_actual = [ ??? ];
 
-G3_actual = [ ??? ];
+G1_actual = [ ...
+      (1)            (0)                         (0); ...
+      (-1/R1_actual) (1/R1_actual + 1/R2_actual) (-1/R2_actual); ...
+      (0)            (-1/R2_actual)              (1/R2_actual)];
 
-B = [ ??? ];
+
+G2_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (C1_actual)                 (0); ...
+      (0)            (0)                         (C2_actual)];
+
+
+G3_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0)];
+
+  
+B = [VG;0;0];
 
 %%
 % Locate the poles in the frequency vector for plotting purposes.
