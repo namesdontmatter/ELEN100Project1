@@ -71,15 +71,15 @@ fignum = fignum+1;
 % Display the component values for the Ideal and Actual designs.
 %
 
-display(' ');
-display('The Ideal Design component values are:');
+disp(' ');
+disp('The Ideal Design component values are:');
 fprintf('    R1 = %+11.4f Ohms.\n',  R1_ideal  );
 fprintf('    R2 = %+11.4f Ohms.\n',  R2_ideal  );
 fprintf('    C1 = %+11.4e Farads.\n', C1_ideal  );
 fprintf('    C2 = %+11.4e Farads.\n', C2_ideal  );
 
-display(' ');
-display('The Actual Design component values are:');
+disp(' ');
+disp('The Actual Design component values are:');
 fprintf('    R1 = %+11.4f Ohms.\n',  R1_actual  );
 fprintf('    R2 = %+11.4f Ohms.\n',  R2_actual  );
 fprintf('    C1 = %+11.4e Farads.\n', C1_actual );
@@ -95,9 +95,9 @@ diff_R2_ideal_actual = ( R2_actual - R2_ideal )/abs(R2_ideal)*100;
 diff_C1_ideal_actual = ( C1_actual - C1_ideal )/abs(C1_ideal)*100;
 diff_C2_ideal_actual = ( C2_actual - C2_ideal )/abs(C2_ideal)*100;
 
-display(' ');
-display('The percent difference between Ideal and Actual design');
-display('component values:');
+disp(' ');
+disp('The percent difference between Ideal and Actual design');
+disp('component values:');
 fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_ideal_actual );
 fprintf('    %% diff R2 = %+8.4f (%%).\n', diff_R2_ideal_actual );
 fprintf('    %% diff C1 = %+8.4f (%%).\n', diff_C1_ideal_actual );
@@ -107,8 +107,8 @@ fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_ideal_actual );
 % Display the poles for the target circuit design transfer function.
 %
 
-display(' ');
-display('The poles for the circuit are:');
+disp(' ');
+disp('The poles for the circuit are:');
 fprintf('    w0 = %+11.4f Radians/Second.\n',w0);
 fprintf('    w1 = %+11.4f Radians/Second.\n',w1);
 fprintf('    f0 = %+11.4f Hertz.\n',f0);
@@ -181,8 +181,8 @@ end;
 % Calculate the frequency response for the Ideal and Actual designs.
 %
 
-Hw_ideal   = proj1E100_freqresp( ?,?,?,?,?,? );
-Hw_actual  = proj1E100_freqresp( ?,?,?,?,?,? );
+Hw_ideal   = proj1E100_freqresp( G1,G2,G3,B,w,Vg );
+Hw_actual  = proj1E100_freqresp( G1,G2,G3,B,w,Vg );
 
 % Capture the values at the poles.
 Hw_ideal_f0  = Hw_ideal(pole_1);
@@ -218,7 +218,7 @@ makedatatip(Hw_ideal_Plot, [pole_1; pole_2]);
 fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
 set(fignum, 'Name',['H(f) Actual Design']);  % Name the figure
 
-Hw_actual_Plot = semilogx( ? , ? ,'-b');         % Generate plot
+Hw_actual_Plot = semilogx( f , Hw_actual ,'-b');         % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -240,8 +240,8 @@ set(fignum, 'Name', ...
     ['H(f) Ideal and Actual Design']);       % Name the figure
 
 Hw_ideal_actual_Plot = ...
-    semilogx( ? , ? ,'-r', ...
-              ? , ? ,'-b');                      % Generate plot
+    semilogx( f , Hw_ideal ,'-r', ...
+              f , Hw_actual ,'-b');                      % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -256,17 +256,17 @@ legend('H_i_d_e_a_l(f)', 'H_a_c_t_u_a_l(f)', 'Location', 'NorthEast');
 % and $\displaystyle{H_{actual}(f)}$ at the two poles.
 %
 
-diff_0_ideal_actual = ( ?? )/abs(Hw_ideal_f0)*100;
-diff_1_ideal_actual = ( ?? )/abs(Hw_ideal_f1)*100;
+diff_0_ideal_actual = (abs(Hw_actual_f0) - abs(Hw_ideal_f0))/abs(Hw_ideal_f0)*100;
+diff_1_ideal_actual = (abs(Hw_actual_f1) - abs(Hw_ideal_f1))/abs(Hw_ideal_f1)*100;
 
-display(' ');
-display('The difference between Ideal and Actual designs at the poles:');
+disp(' ');
+disp('The difference between Ideal and Actual designs at the poles:');
 fprintf('    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n', f0, Hw_ideal_f0);
 fprintf('    Actual Design H(%+10.4f) = %+8.4f (dB).\n', f0, Hw_actual_f0);
 fprintf('        %% diff = %+8.4f (%%).\n', diff_0_ideal_actual);
-fprintf('    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n', f1, ? );
-fprintf('    Actual Design H(%+10.4f) = %+8.4f (dB).\n', f1, ? );
-fprintf('        %% diff = %+8.4f (%%).\n', ? );
+fprintf('    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n', f1, Hw_ideal_f1 );
+fprintf('    Actual Design H(%+10.4f) = %+8.4f (dB).\n', f1, Hw_actual_f1 );
+fprintf('        %% diff = %+8.4f (%%).\n', diff_1_ideal_actual);
 
 %% Problem 4
 %
@@ -297,25 +297,25 @@ fignum = fignum+1;
 
 Hw_ltspice_f0 =     ?      ;      % dB
 Hw_ltspice_f1 =     ?      ;      % dB
-f0_ltspice =      ?    ;          % Hertz
-f1_ltspice =      ?    ;          % Hertz
+f0_ltspice =      Hw_ltspice_f0/(2*pi)    ;          % Hertz
+f1_ltspice =      Hw_ltspice_f1/(2*pi)    ;          % Hertz
 
-diff_0_actual_ltspice =  ( ?? )/abs(Hw_actual_f0)*100;
-diff_1_actual_ltspice =  ( ?? )/abs(Hw_actual_f1)*100;
+diff_0_actual_ltspice =  (abs(Hw_ltspice_f0) - abs(Hw_actual_f0))/abs(Hw_actual_f0)*100;
+diff_1_actual_ltspice =  (abs(Hw_ltspice_f1) - abs(Hw_actual_f1))/abs(Hw_actual_f1)*100;
 
-display(' '); 
-display('The percent difference between MATLAB and LTSpice Actual');
-display('designs at the poles:');
+disp(' '); 
+disp('The percent difference between MATLAB and LTSpice Actual');
+disp('designs at the poles:');
 fprintf('    Actual  MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
-         f0, ? );
+         f0, Hw_actual_f0);
 fprintf('    Actual LTSpice H(%+10.4f) = %+8.4f (dB).\n', ...
          f0_ltspice, Hw_ltspice_f0);
 fprintf('        %% diff = %+8.4f (%%).\n', diff_0_actual_ltspice);
 fprintf('    Actual  MATLAB H(%+10.4f) = %+8.4f (dB).\n', ...
-         ? , ? );
+         f1, Hw_actual_f1);
 fprintf('    Actual LTSpice H(%+10.4f) = %+8.4f (dB).\n', ...
-         ? , ? );
-fprintf('        %% diff = %+8.4f (%%).\n', ? );
+         f1_ltspice, Hw_ltspice_f1);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_1_actual_ltspice);
 
 %% Problem 5
 %
@@ -378,8 +378,8 @@ diff_0_actual_varied = ...
 diff_1_actual_varied = ...
     ( ?? )/abs( ? )*100;
 
-display(' ');
-display('The difference between Varied and Actual designs at the poles:');
+disp(' ');
+disp('The difference between Varied and Actual designs at the poles:');
 for iter = 1:value_sets
     diff_R1_actual_varied = ...
         (Q_actual_varied(iter,1)-R1_actual)/abs(R1_actual)*100;
@@ -429,7 +429,7 @@ R2_meas =    ?   ;          % Ohms
 C1_meas =     ?         ;   % Farads
 C2_meas =     ?         ;   % Farads
 
-display(' ');
+disp(' ');
 fprintf('Measured component values are:\n');
 fprintf('    R1 = %+11.4f Ohms.\n',  ?  );
 fprintf('    R2 = %+11.4f Ohms.\n',  ?  );
@@ -446,9 +446,9 @@ diff_R2_meas_actual =  ?? ;
 diff_C1_meas_actual =  ?? ;
 diff_C2_meas_actual =  ?? ;
 
-display(' ');
-display('The percent difference between Measured and Actual design');
-display('component values:');
+disp(' ');
+disp('The percent difference between Measured and Actual design');
+disp('component values:');
 fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_meas_actual );
 fprintf('    %% diff R2 = %+8.4f (%%).\n', ? );
 fprintf('    %% diff C1 = %+8.4f (%%).\n', ? );
@@ -501,7 +501,7 @@ end;
 % Calculate the frequency response for the Measured Actual design.
 %
 
-Hw_measured_actual = ?? ;  % |H(w)| in decibels (dB) is a function
+Hw_meas_actual = ?? ;  % |H(w)| in decibels (dB) is a function
 % of Vo_meas and Vg_meas
 
 % This section of code is used to generate an expected frequency response
@@ -606,9 +606,9 @@ diff_1_meas_actual =  ?? ;
 diff_0_sim_meas_actual = ?? ;
 diff_1_sim_meas_actual = ?? ;
 
-display(' ');
-display('The percent difference between MATLAB and Measured Actual');
-display('designs at the poles:');
+disp(' ');
+disp('The percent difference between MATLAB and Measured Actual');
+disp('designs at the poles:');
 fprintf('    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
         f0, Hw_actual_f0);
 fprintf('    Actual   Measured H(%+10.4f) = %+8.4f (dB).\n', ...
@@ -620,9 +620,9 @@ fprintf('    Actual   Measured H(%+10.4f) = %+8.4f (dB).\n', ...
         f1_measured, Hw_meas_actual_f1);
 fprintf('        %% diff = %+8.4f (%%).\n', diff_1_meas_actual);
 
-display(' ');
-display('The percent difference between MATLAB and the simulated');
-display('Measured Actual designs at the poles:');
+disp(' ');
+disp('The percent difference between MATLAB and the simulated');
+disp('Measured Actual designs at the poles:');
 fprintf('    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
         f0, Hw_actual_f0);
 fprintf('    Simulate Measured H(%+10.4f) = %+8.4f (dB).\n', ...
@@ -637,7 +637,7 @@ fprintf('        %% diff = %+8.4f (%%).\n', diff_1_sim_meas_actual);
 %% Program execution complete
 %
 
-display(' ');
+disp(' ');
 disp('Program execution complete....');
 
 %% MATLAB code listing
