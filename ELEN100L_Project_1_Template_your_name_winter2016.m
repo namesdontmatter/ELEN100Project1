@@ -295,13 +295,13 @@ fignum = fignum+1;
 % Calculate the percent difference between $\displaystyle{H_{actual}(f)}$
 % and $\displaystyle{H_{LTSpice}(f)}$ actual designs at the two poles.
 
-Hw_ltspice_f0 =     ?      ;      % dB
-Hw_ltspice_f1 =     ?      ;      % dB
-f0_ltspice =      Hw_ltspice_f0/(2*pi)    ;          % Hertz
-f1_ltspice =      Hw_ltspice_f1/(2*pi)    ;          % Hertz
+Hw_ltspice_f0 =   -1.8787*10^1  ;      % dB
+Hw_ltspice_f1 =   -4.8345*10^1  ;      % dB
+f0_ltspice =      3000/(2*pi)       ;          % Hertz
+f1_ltspice =      20000/(2*pi)      ;          % Hertz
 
-diff_0_actual_ltspice =  (abs(Hw_ltspice_f0) - abs(Hw_actual_f0))/abs(Hw_actual_f0)*100;
-diff_1_actual_ltspice =  (abs(Hw_ltspice_f1) - abs(Hw_actual_f1))/abs(Hw_actual_f1)*100;
+diff_0_actual_ltspice =  (abs(f0_ltspice) - abs(Hw_actual_f0))/abs(Hw_actual_f0)*100;
+diff_1_actual_ltspice =  (abs(f1_ltspice) - abs(Hw_actual_f1))/abs(Hw_actual_f1)*100;
 
 disp(' '); 
 disp('The percent difference between MATLAB and LTSpice Actual');
@@ -338,7 +338,7 @@ Q_actual = [R1_actual, R2_actual, C1_actual, C2_actual];
 % Generate the frequency response values for the specified number of
 % iterations.
 [Hw_actual_varied, Q_actual_varied] = ...
-             proj1E100_freqresp_varied( ?,?,?,?,? );
+             proj1E100_freqresp_varied( Q_actual,B,w,Vg,value_sets);
 
 % Capture the values at the poles.
 Hw_actual_varied_f0 = zeros(1,value_sets);
@@ -357,7 +357,7 @@ set(fignum, 'Name', ...
     ['H(f) Actual Design Varied']);          % Name the figure
 
 Hw_actual_varied_Plot = ...
-    semilogx( ? , ? );            % Generate plot
+    semilogx( w , Hw_actual_varied );            % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
