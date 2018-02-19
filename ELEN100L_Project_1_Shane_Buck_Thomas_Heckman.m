@@ -34,8 +34,8 @@ C1_ideal =      0.1*10^-6  ;    % Farads
 C2_ideal =      0.1*10^-6  ;    % Farads
 
 % These Actual Design element values are fixed in the circuit.
-R1_actual =    1240       ;   % Ohms
-R2_actual =    1330       ;   % Ohms
+R1_actual =    1200       ;   % Ohms
+R2_actual =    1300      ;   % Ohms
 C1_actual =    0.1*10^-6       ;   % Farads
 C2_actual =    0.1*10^-6       ;   % Farads
 
