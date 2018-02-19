@@ -295,8 +295,8 @@ fignum = fignum+1;
 % Calculate the percent difference between $\displaystyle{H_{actual}(f)}$
 % and $\displaystyle{H_{LTSpice}(f)}$ actual designs at the two poles.
 
-Hw_ltspice_f0 =   -1.8787*10^1  ;      % dB
-Hw_ltspice_f1 =   -4.8345*10^1  ;      % dB
+Hw_ltspice_f0 =   -1.8402*10^1  ;      % dB
+Hw_ltspice_f1 =   -4.7949*10^1  ;      % dB
 f0_ltspice =      3000/(2*pi)       ;          % Hertz
 f1_ltspice =      20000/(2*pi)      ;          % Hertz
 
