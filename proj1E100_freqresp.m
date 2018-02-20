@@ -27,4 +27,4 @@ end;
 V3 = mag(3,1:length(w));
 % Since we are interested only in V3, we will extract row 3 of matrix mag.
 
-F = 20*log10(V3/abs(Vg));
+F = 20*(log10(abs(V3)./abs(Vg)));

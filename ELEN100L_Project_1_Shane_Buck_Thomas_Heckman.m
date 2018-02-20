@@ -297,8 +297,8 @@ fignum = fignum+1;
 % Calculate the percent difference between $\displaystyle{H_{actual}(f)}$
 % and $\displaystyle{H_{LTSpice}(f)}$ actual designs at the two poles.
 
-Hw_ltspice_f0 =   -1.8787*10^1  ;      % dB
-Hw_ltspice_f1 =   -4.8345*10^1  ;      % dB
+Hw_ltspice_f0 =   -2.94  ;      % dB
+Hw_ltspice_f1 =   -19.14  ;      % dB
 f0_ltspice =      3000/(2*pi)       ;          % Hertz
 f1_ltspice =      20000/(2*pi)      ;          % Hertz
 
@@ -359,7 +359,7 @@ set(fignum, 'Name', ...
     ['H(f) Actual Design Varied']);          % Name the figure
 
 Hw_actual_varied_Plot = ...
-    semilogx( w , Hw_actual_varied );            % Generate plot
+    semilogx( f , Hw_actual_varied );            % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -503,7 +503,7 @@ end;
 % Calculate the frequency response for the Measured Actual design.
 %
 
-Hw_meas_actual = Vo_meas./Vg_meas ;  % |H(w)| in decibels (dB) is a function
+Hw_meas_actual = 20*log10(abs(Vo_meas)./abs(Vg_meas)) ;  % |H(w)| in decibels (dB) is a function9
 % of Vo_meas and Vg_meas
 
 % This section of code is used to generate an expected frequency response
@@ -525,7 +525,7 @@ G3_sim_meas_actual = [ ...
 
 Hw_sim_meas_actual = ...
     proj1E100_freqresp(G1_sim_meas_actual, G2_sim_meas_actual,...
-                       G3_sim_meas_actual, B, freq_meas, Vg_meas);
+                       G3_sim_meas_actual, B, 2*pi*freq_meas, VG);
 
 % Capture the values at the poles.
 Hw_meas_actual_f0 = Hw_meas_actual(pole_1_meas);
