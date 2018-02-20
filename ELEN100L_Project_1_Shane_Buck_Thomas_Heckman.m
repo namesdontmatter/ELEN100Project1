@@ -42,8 +42,8 @@ C2_actual =     0.1*10^-6  ;    % Farads
 % Setup values for the poles.
 w0 =     3000   ;        % Radians/Second
 w1 =     20000   ;        % Radians/Second
-f0 =     (3000/6.28)   ;        % Hertz
-f1 =     (20000/6.28)   ;        % Hertz
+f0 =     (3000/(2*pi))   ;        % Hertz
+f1 =     (20000/(2*pi))   ;        % Hertz
 
 % Build an array for the angular frequency and convert it to Hertz.
 dw = 10;                   % Step size for analysis
@@ -166,16 +166,16 @@ for iter = 1:length(f)             % Locate the first pole
     if (f(iter) == f0)
         pole_1 = iter;
         break;
-    end;
-end;
+    end
+end
 
 pole_2 = 0;
 for iter = pole_1+1:length(f)     % Locate the second pole
     if (f(iter) == f1)
         pole_2 = iter;
         break;
-    end;
-end;
+    end
+end
 
 %%
 % Calculate the frequency response for the Ideal and Actual designs.
@@ -503,7 +503,7 @@ end;
 % Calculate the frequency response for the Measured Actual design.
 %
 
-Hw_meas_actual = Vo_meas/Vg_meas ;  % |H(w)| in decibels (dB) is a function
+Hw_meas_actual = Vo_meas./Vg_meas ;  % |H(w)| in decibels (dB) is a function
 % of Vo_meas and Vg_meas
 
 % This section of code is used to generate an expected frequency response
@@ -525,7 +525,7 @@ G3_sim_meas_actual = [ ...
 
 Hw_sim_meas_actual = ...
     proj1E100_freqresp(G1_sim_meas_actual, G2_sim_meas_actual,...
-                       G3_sim_meas_actual, B, w, Vg_meas);
+                       G3_sim_meas_actual, B, freq_meas, Vg_meas);
 
 % Capture the values at the poles.
 Hw_meas_actual_f0 = Hw_meas_actual(pole_1_meas);
@@ -543,7 +543,7 @@ set(fignum, 'Name', ...
     ['H(f) Measured Actual Design']);        % Name the figure
 
 Hw_meas_actual_Plot = semilogx(...
-          f , Hw_meas_actual,'-m');      % Generate plot
+          freq_meas , Hw_meas_actual,'-m');      % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -565,7 +565,7 @@ set(fignum, 'Name', ...
   ['H(f) Simulate Measured Actual Design']); % Name the figure
 
 Hw_sim_meas_actual_Plot = semilogx(...
-         f , Hw_sim_meas_actual,'-g');       % Generate plot
+         freq_meas , Hw_sim_meas_actual,'-g');       % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -588,8 +588,8 @@ set(fignum, 'Name', ...
     ['H(f) Measured and Actual Design']);    % Name the figure
 
 semilogx( f, Hw_actual,'-b',...
-          f, Hw_meas_actual,'-m', ...
-          f, Hw_sim_meas_actual,'-g');       % Generate plot
+          freq_meas, Hw_meas_actual,'-m', ...
+          freq_meas, Hw_sim_meas_actual,'-g');       % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
