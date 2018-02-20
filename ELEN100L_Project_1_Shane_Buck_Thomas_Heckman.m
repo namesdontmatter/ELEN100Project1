@@ -27,17 +27,17 @@ format long; format compact;
 %
 
 % These Ideal Design element values are fixed in the circuit.
-VG  =  1;                   % Generator voltage
+VG  =  1                   ;    % Generator voltage
 R1_ideal =      1250       ;    % Ohms
 R2_ideal =      1333.33    ;    % Ohms
 C1_ideal =      0.1*10^-6  ;    % Farads
 C2_ideal =      0.1*10^-6  ;    % Farads
 
 % These Actual Design element values are fixed in the circuit.
-R1_actual =    1200       ;   % Ohms
-R2_actual =    1300      ;   % Ohms
-C1_actual =    0.1*10^-6       ;   % Farads
-C2_actual =    0.1*10^-6       ;   % Farads
+R1_actual =     1200       ;    % Ohms
+R2_actual =     1300       ;    % Ohms
+C1_actual =     0.1*10^-6  ;    % Farads
+C2_actual =     0.1*10^-6  ;    % Farads
 
 % Setup values for the poles.
 w0 =     3000   ;        % Radians/Second
@@ -166,23 +166,23 @@ for iter = 1:length(f)             % Locate the first pole
     if (f(iter) == f0)
         pole_1 = iter;
         break;
-    end
-end
+    end;
+end;
 
 pole_2 = 0;
 for iter = pole_1+1:length(f)     % Locate the second pole
     if (f(iter) == f1)
         pole_2 = iter;
         break;
-    end
-end
+    end;
+end;
 
 %%
 % Calculate the frequency response for the Ideal and Actual designs.
 %
 
-Hw_ideal   = proj1E100_freqresp( G1,G2,G3,B,w,Vg );
-Hw_actual  = proj1E100_freqresp( G1,G2,G3,B,w,Vg );
+Hw_ideal   = proj1E100_freqresp( G1_ideal,G2_ideal,G3_ideal,B,w,VG);
+Hw_actual  = proj1E100_freqresp( G1_actual,G2_actual,G3_actual,B,w,VG);
 
 % Capture the values at the poles.
 Hw_ideal_f0  = Hw_ideal(pole_1);
@@ -198,7 +198,8 @@ Hw_actual_f1 = Hw_actual(pole_2);
 fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
 set(fignum, 'Name',['H(f) Ideal Design']);   % Name the figure
 
-Hw_ideal_Plot = semilogx( f, Hw_ideal ,'-r');          % Generate plot
+Hw_ideal_Plot = ...
+      semilogx( f, Hw_ideal ,'-r');          % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -218,7 +219,8 @@ makedatatip(Hw_ideal_Plot, [pole_1; pole_2]);
 fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
 set(fignum, 'Name',['H(f) Actual Design']);  % Name the figure
 
-Hw_actual_Plot = semilogx( f , Hw_actual ,'-b');         % Generate plot
+Hw_actual_Plot = ...
+      semilogx(f , Hw_actual ,'-b');         % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -241,7 +243,7 @@ set(fignum, 'Name', ...
 
 Hw_ideal_actual_Plot = ...
     semilogx( f , Hw_ideal ,'-r', ...
-              f , Hw_actual ,'-b');                      % Generate plot
+              f , Hw_actual ,'-b');          % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -295,8 +297,8 @@ fignum = fignum+1;
 % Calculate the percent difference between $\displaystyle{H_{actual}(f)}$
 % and $\displaystyle{H_{LTSpice}(f)}$ actual designs at the two poles.
 
-Hw_ltspice_f0 =   -1.8402*10^1  ;      % dB
-Hw_ltspice_f1 =   -4.7949*10^1  ;      % dB
+Hw_ltspice_f0 =   -1.8787*10^1  ;      % dB
+Hw_ltspice_f1 =   -4.8345*10^1  ;      % dB
 f0_ltspice =      3000/(2*pi)       ;          % Hertz
 f1_ltspice =      20000/(2*pi)      ;          % Hertz
 
@@ -338,7 +340,7 @@ Q_actual = [R1_actual, R2_actual, C1_actual, C2_actual];
 % Generate the frequency response values for the specified number of
 % iterations.
 [Hw_actual_varied, Q_actual_varied] = ...
-             proj1E100_freqresp_varied( Q_actual,B,w,Vg,value_sets);
+             proj1E100_freqresp_varied( Q_actual,B,w,VG,value_sets);
 
 % Capture the values at the poles.
 Hw_actual_varied_f0 = zeros(1,value_sets);
@@ -374,21 +376,21 @@ legend('H_1(f)', 'H_2(f)', 'H_3(f)', 'H_4(f)', 'H_5(f)', ...
 %
 
 diff_0_actual_varied = ...
-    (Hw_actual_varied_f0-Hw_actual_f0)/abs(Hw_actual_f0)*100;
+    (Hw_actual_varied_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
 diff_1_actual_varied = ...
-    (Hw_actual_varied_f1-Hw_actual_f1)/abs(Hw_actual_f1)*100;
+    (Hw_actual_varied_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
 
 disp(' ');
 disp('The difference between Varied and Actual designs at the poles:');
 for iter = 1:value_sets
     diff_R1_actual_varied = ...
-        (Q_actual_varied(iter,1)-R1_actual)/abs(R1_actual)*100;
+        (Q_actual_varied(iter,1) - R1_actual)/abs(R1_actual)*100;
     diff_R2_actual_varied = ...
-        (Q_actual_varied(iter,2)-R2_actual)/abs(R2_actual)*100;
+        (Q_actual_varied(iter,2) - R2_actual)/abs(R2_actual)*100;
     diff_C1_actual_varied = ...
-        (Q_actual_varied(iter,3)-C1_actual)/abs(C1_actual)*100;
+        (Q_actual_varied(iter,3) - C1_actual)/abs(C1_actual)*100;
     diff_C2_actual_varied = ...
-        (Q_actual_varied(iter,4)-C2_actual)/abs(C2_actual)*100;
+        (Q_actual_varied(iter,4) - C2_actual)/abs(C2_actual)*100;
 
     fprintf('    Variation Component Set %-2.u: \n', iter);
     fprintf('        R1 = %+11.4f Ohms,    %% diff = %+8.4f (%%).\n', ...
@@ -398,7 +400,7 @@ for iter = 1:value_sets
     fprintf('        C1 = %+11.4e Farads,  %% diff = %+8.4f (%%).\n', ...
             Q_actual_varied(iter,3), diff_C1_actual_varied);
     fprintf('        C2 = %+11.4e Farads,  %% diff = %+8.4f (%%).\n', ...
-            Q_actual_varied(iter,4), diff_C2_actual_varied );
+            Q_actual_varied(iter,4), diff_C2_actual_varied);
     fprintf('            Varied Design H(%+10.4f) = %+8.4f (dB).\n', ...
             f0, Hw_actual_varied_f0(iter));
     fprintf('            Actual Design H(%+10.4f) = %+8.4f (dB).\n', ...
@@ -406,11 +408,11 @@ for iter = 1:value_sets
     fprintf('                %% diff = %+8.4f (%%).\n', ...
             diff_0_actual_varied(iter));
     fprintf('            Varied Design H(%+10.4f) = %+8.4f (dB).\n', ...
-            ? , ?  );
+            f1, Hw_actual_varied_f1(iter));
     fprintf('            Actual Design H(%+10.4f) = %+8.4f (dB).\n', ...
-            ? , ?  );
+            f1, Hw_actual_f1);
     fprintf('                %% diff = %+8.4f (%%).\n', ...
-             ? );
+            diff_1_actual_varied(iter));
 end;
 
 %% Problem 6
@@ -424,35 +426,35 @@ fignum = fignum+1;
 % Display the measured values for the components used in the Actual
 % design.
 %
-R1_meas =    ?   ;          % Ohms
-R2_meas =    ?   ;          % Ohms
-C1_meas =     ?         ;   % Farads
-C2_meas =     ?         ;   % Farads
+R1_meas =    1200        ;   % Ohms
+R2_meas =    1300        ;   % Ohms
+C1_meas =    0.1*10^-6   ;   % Farads
+C2_meas =    0.1*10^-6   ;   % Farads
 
 disp(' ');
 fprintf('Measured component values are:\n');
-fprintf('    R1 = %+11.4f Ohms.\n',  ?  );
-fprintf('    R2 = %+11.4f Ohms.\n',  ?  );
-fprintf('    C1 = %+11.4e Farads.\n', ?  );
-fprintf('    C2 = %+11.4e Farads.\n', ?  );
+fprintf('    R1 = %+11.4f Ohms.\n', R1_meas);
+fprintf('    R2 = %+11.4f Ohms.\n', R2_meas);
+fprintf('    C1 = %+11.4e Farads.\n', C1_meas);
+fprintf('    C2 = %+11.4e Farads.\n', C2_meas);
 
 %%
 % Compute the percent differences between the Measured and Actual design
 % component values.
 %
 
-diff_R1_meas_actual =  (R1_meas-R1_actual)/abs(R1_actual)*100;
-diff_R2_meas_actual =  ?? ;
-diff_C1_meas_actual =  ?? ;
-diff_C2_meas_actual =  ?? ;
+diff_R1_meas_actual =  (R1_meas - R1_actual)/abs(R1_actual)*100;
+diff_R2_meas_actual =  (R2_meas - R2_actual)/abs(R2_actual)*100;
+diff_C1_meas_actual =  (C1_meas - C1_actual)/abs(C1_actual)*100;
+diff_C2_meas_actual =  (C2_meas - C2_actual)/abs(C2_actual)*100;
 
 disp(' ');
 disp('The percent difference between Measured and Actual design');
 disp('component values:');
-fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_meas_actual );
-fprintf('    %% diff R2 = %+8.4f (%%).\n', ? );
-fprintf('    %% diff C1 = %+8.4f (%%).\n', ? );
-fprintf('    %% diff C2 = %+8.4f (%%).\n', ? );
+fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_meas_actual);
+fprintf('    %% diff R2 = %+8.4f (%%).\n', diff_R2_meas_actual);
+fprintf('    %% diff C1 = %+8.4f (%%).\n', diff_C1_meas_actual);
+fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_meas_actual);
 
 %%
 % Import the measured data for processing.
@@ -501,20 +503,29 @@ end;
 % Calculate the frequency response for the Measured Actual design.
 %
 
-Hw_meas_actual = ?? ;  % |H(w)| in decibels (dB) is a function
+Hw_meas_actual = Vo_meas/Vg_meas ;  % |H(w)| in decibels (dB) is a function
 % of Vo_meas and Vg_meas
 
 % This section of code is used to generate an expected frequency response
 % based upon the measured component values.
-G1_sim_meas_actual = [ ?? ];
+G1_sim_meas_actual = [ ...
+      (1)            (0)                         (0); ...
+      (-1/R1_meas)   (1/R1_meas + 1/R2_meas)     (-1/R2_meas); ...
+      (0)            (-1/R2_actual)              (1/R2_meas)];
 
-G2_sim_meas_actual = [ ?? ];
+G2_sim_meas_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (C1_meas)                   (0); ...
+      (0)            (0)                         (C2_meas)];
 
-G3_sim_meas_actual = [ ?? ];
+G3_sim_meas_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0)];
 
 Hw_sim_meas_actual = ...
-    proj1E100_freqresp( ? , ? ,...
-                        ? , ? , ? , ?);
+    proj1E100_freqresp(G1_sim_meas_actual, G2_sim_meas_actual,...
+                       G3_sim_meas_actual, B, w, Vg_meas);
 
 % Capture the values at the poles.
 Hw_meas_actual_f0 = Hw_meas_actual(pole_1_meas);
@@ -532,7 +543,7 @@ set(fignum, 'Name', ...
     ['H(f) Measured Actual Design']);        % Name the figure
 
 Hw_meas_actual_Plot = semilogx(...
-          ? , ? ,'-m');                          % Generate plot
+          f , Hw_meas_actual,'-m');      % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -554,7 +565,7 @@ set(fignum, 'Name', ...
   ['H(f) Simulate Measured Actual Design']); % Name the figure
 
 Hw_sim_meas_actual_Plot = semilogx(...
-          ? , ? ,'-g');                          % Generate plot
+         f , Hw_sim_meas_actual,'-g');       % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -576,9 +587,9 @@ fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
 set(fignum, 'Name', ...
     ['H(f) Measured and Actual Design']);    % Name the figure
 
-semilogx( ? , ? ,'-b',...
-          ? , ? ,'-m', ...
-          ? , ? ,'-g');                          % Generate plot
+semilogx( f, Hw_actual,'-b',...
+          f, Hw_meas_actual,'-m', ...
+          f, Hw_sim_meas_actual,'-g');       % Generate plot
 grid on;                                     % Turn grid on
 xlabel('Frequency (Hz)');                    % Label the x-axis
 ylabel('Amplitude (dB)');                    % Label the y-axis
@@ -600,11 +611,14 @@ f0_measured = freq_meas(pole_1_meas);         % Hertz
 f1_measured = freq_meas(pole_2_meas);         % Hertz
 
 diff_0_meas_actual = ...
-    (Hw_meas_actual_f0-Hw_actual_f0)/abs(Hw_actual_f0)*100;
-diff_1_meas_actual =  ?? ;
+    (Hw_meas_actual_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_meas_actual = ...
+    (Hw_meas_actual_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
 
-diff_0_sim_meas_actual = ?? ;
-diff_1_sim_meas_actual = ?? ;
+diff_0_sim_meas_actual = ...
+    (Hw_sim_meas_actual_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_sim_meas_actual = ...
+    (Hw_sim_meas_actual_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
 
 disp(' ');
 disp('The percent difference between MATLAB and Measured Actual');
