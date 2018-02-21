@@ -1,0 +1,8 @@
+
+
+R1_meas = 1.1980 (Brown Red Red)
+R2_meas = 1.2841 (Brown Orange Red)
+
+C1_meas = 0.1048 uF
+C2_meas = 0.0989 uF
+

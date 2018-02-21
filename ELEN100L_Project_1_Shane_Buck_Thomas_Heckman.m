@@ -426,10 +426,10 @@ fignum = fignum+1;
 % Display the measured values for the components used in the Actual
 % design.
 %
-R1_meas =    1200        ;   % Ohms
-R2_meas =    1300        ;   % Ohms
-C1_meas =    0.1*10^-6   ;   % Farads
-C2_meas =    0.1*10^-6   ;   % Farads
+R1_meas =    1.1980*10^3        ;   % Ohms
+R2_meas =    1.2841*10^3        ;   % Ohms
+C1_meas =    0.1048*10^-6       ;   % Farads
+C2_meas =    0.0989*10^-6       ;   % Farads
 
 disp(' ');
 fprintf('Measured component values are:\n');
@@ -460,7 +460,7 @@ fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_meas_actual);
 % Import the measured data for processing.
 %
 % The measured values for frequency response are contained in the external
-% Excel spreadsheet file named "ELEN100L_Project_1_Measured_Results.xlsx".
+% Excel spreadsheet file named "ELEN100L_Project_1_Measured_Results_Lab.xlsx".
 % These measured values are imported into MATLAB at run-time using MATLAB's
 % *Import* feature. For the solution shown below, the initial "import" was
 % executed to generate an external function file which can be called at
@@ -468,7 +468,7 @@ fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_meas_actual);
 %
 
 [freq_meas,Vg_meas,Vo_meas] = importfile_problem6...
-    ('ELEN100L_Project_1_Measured_Results.xlsx','Sheet1',2,81);
+    ('ELEN100L_Project_1_Measured_Results_Lab.xlsx','Sheet1',2,81);
 
 % Convert the measured column vectors to single row vectors.
 dim = size(freq_meas);   rows = 1;     columns = dim(1,1);
