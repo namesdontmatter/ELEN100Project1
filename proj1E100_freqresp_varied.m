@@ -13,7 +13,7 @@ F = []; Qout = [];
 
 % !!!IMPORTANT!!!
 % Comment out the following line before final execution for submission.
-rng('default');
+%rng('default');
 % Puts the settings of the random number generator used by rand to their
 % default values so that they produce the same random numbers as if you
 % restarted MATLAB. In other words, this will produce a controlled solution
