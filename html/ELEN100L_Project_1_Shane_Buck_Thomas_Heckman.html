@@ -1,0 +1,1319 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ELEN 100L (Electric Circuits II): Project 1, Shane Buck, Thomas Heckman</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-02-27"><meta name="DC.source" content="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>ELEN 100L (Electric Circuits II): Project 1, Shane Buck, Thomas Heckman</h1><!--introduction--><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_01_your_name_winter2015.png" alt=""> </p><p><b>Hard Copy Deliverables:</b></p><div><ol><li>Hard copy for hand calculations.</li><li>A MATLAB script and publish the solution using MATLAB's <b>publish</b> feature.</li><li>Turn in MATLAB scripts and a document of the run-time results.</li><li>Turn in the Excel file with the measured results.</li></ol></div><p><b>Soft Copy Deliverables:</b></p><div><ol><li>Turn in MATLAB files.</li><li>Turn in LTSpice files.</li><li>Turn in the Excel file with the measured results.</li></ol></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Initialize MATLAB Environment</a></li><li><a href="#2">Setup global variables</a></li><li><a href="#3">Problem 3</a></li><li><a href="#14">Problem 4</a></li><li><a href="#18">Problem 5</a></li><li><a href="#22">Problem 6</a></li><li><a href="#32">Program execution complete</a></li><li><a href="#33">MATLAB code listing</a></li></ul></div><h2 id="1">Initialize MATLAB Environment</h2><pre class="codeinput">clear; clc; clf; cla; close <span class="string">all</span>;
+format <span class="string">long</span>; format <span class="string">compact</span>;
+</pre><h2 id="2">Setup global variables</h2><pre class="codeinput"><span class="comment">% These Ideal Design element values are fixed in the circuit.</span>
+VG  =  1                   ;    <span class="comment">% Generator voltage</span>
+R1_ideal =      1250       ;    <span class="comment">% Ohms</span>
+R2_ideal =      1333.33    ;    <span class="comment">% Ohms</span>
+C1_ideal =      0.1*10^-6  ;    <span class="comment">% Farads</span>
+C2_ideal =      0.1*10^-6  ;    <span class="comment">% Farads</span>
+
+<span class="comment">% These Actual Design element values are fixed in the circuit.</span>
+R1_actual =     1200       ;    <span class="comment">% Ohms</span>
+R2_actual =     1300       ;    <span class="comment">% Ohms</span>
+C1_actual =     0.1*10^-6  ;    <span class="comment">% Farads</span>
+C2_actual =     0.1*10^-6  ;    <span class="comment">% Farads</span>
+
+<span class="comment">% Setup values for the poles.</span>
+w0 =     3000   ;        <span class="comment">% Radians/Second</span>
+w1 =     20000   ;        <span class="comment">% Radians/Second</span>
+f0 =     (3000/(2*pi))   ;        <span class="comment">% Hertz</span>
+f1 =     (20000/(2*pi))   ;        <span class="comment">% Hertz</span>
+
+<span class="comment">% Build an array for the angular frequency and convert it to Hertz.</span>
+dw = 10;                   <span class="comment">% Step size for analysis</span>
+w = [1:dw:w0-dw, <span class="keyword">...</span>
+     w0, <span class="keyword">...</span>
+     w0+dw:dw:w1-dw, <span class="keyword">...</span>
+     w1, <span class="keyword">...</span>
+     w1+dw:dw:1.0e6];      <span class="comment">% Radians/Second (ensure poles are included)</span>
+
+ f =      w/(2*pi)     ;            <span class="comment">% Hertz</span>
+
+<span class="comment">% These values are used for plotting purposes.</span>
+fignum = 1;
+plot_left   = 1;       plot_right = 2e5;    <span class="comment">% x-axis range (Hertz)</span>
+plot_bottom = -90;     plot_top   = 5;      <span class="comment">% y-axis range (dB)</span>
+</pre><h2 id="3">Problem 3</h2><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_02_YourName_winter2015.png" alt=""> </p><pre class="codeinput">fignum = fignum+1;
+</pre><p>Display the component values for the Ideal and Actual designs.</p><pre class="codeinput">disp(<span class="string">' '</span>);
+disp(<span class="string">'The Ideal Design component values are:'</span>);
+fprintf(<span class="string">'    R1 = %+11.4f Ohms.\n'</span>,  R1_ideal  );
+fprintf(<span class="string">'    R2 = %+11.4f Ohms.\n'</span>,  R2_ideal  );
+fprintf(<span class="string">'    C1 = %+11.4e Farads.\n'</span>, C1_ideal  );
+fprintf(<span class="string">'    C2 = %+11.4e Farads.\n'</span>, C2_ideal  );
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The Actual Design component values are:'</span>);
+fprintf(<span class="string">'    R1 = %+11.4f Ohms.\n'</span>,  R1_actual  );
+fprintf(<span class="string">'    R2 = %+11.4f Ohms.\n'</span>,  R2_actual  );
+fprintf(<span class="string">'    C1 = %+11.4e Farads.\n'</span>, C1_actual );
+fprintf(<span class="string">'    C2 = %+11.4e Farads.\n'</span>, C2_actual );
+</pre><pre class="codeoutput"> 
+The Ideal Design component values are:
+    R1 =  +1250.0000 Ohms.
+    R2 =  +1333.3300 Ohms.
+    C1 = +1.0000e-07 Farads.
+    C2 = +1.0000e-07 Farads.
+ 
+The Actual Design component values are:
+    R1 =  +1200.0000 Ohms.
+    R2 =  +1300.0000 Ohms.
+    C1 = +1.0000e-07 Farads.
+    C2 = +1.0000e-07 Farads.
+</pre><p>Compute the percent differences between the Ideal and Actual design component values.</p><pre class="codeinput">diff_R1_ideal_actual = ( R1_actual - R1_ideal )/abs(R1_ideal)*100;
+diff_R2_ideal_actual = ( R2_actual - R2_ideal )/abs(R2_ideal)*100;
+diff_C1_ideal_actual = ( C1_actual - C1_ideal )/abs(C1_ideal)*100;
+diff_C2_ideal_actual = ( C2_actual - C2_ideal )/abs(C2_ideal)*100;
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The percent difference between Ideal and Actual design'</span>);
+disp(<span class="string">'component values:'</span>);
+fprintf(<span class="string">'    %% diff R1 = %+8.4f (%%).\n'</span>, diff_R1_ideal_actual );
+fprintf(<span class="string">'    %% diff R2 = %+8.4f (%%).\n'</span>, diff_R2_ideal_actual );
+fprintf(<span class="string">'    %% diff C1 = %+8.4f (%%).\n'</span>, diff_C1_ideal_actual );
+fprintf(<span class="string">'    %% diff C2 = %+8.4f (%%).\n'</span>, diff_C2_ideal_actual );
+</pre><pre class="codeoutput"> 
+The percent difference between Ideal and Actual design
+component values:
+    % diff R1 =  -4.0000 (%).
+    % diff R2 =  -2.4998 (%).
+    % diff C1 =  +0.0000 (%).
+    % diff C2 =  +0.0000 (%).
+</pre><p>Display the poles for the target circuit design transfer function.</p><pre class="codeinput">disp(<span class="string">' '</span>);
+disp(<span class="string">'The poles for the circuit are:'</span>);
+fprintf(<span class="string">'    w0 = %+11.4f Radians/Second.\n'</span>,w0);
+fprintf(<span class="string">'    w1 = %+11.4f Radians/Second.\n'</span>,w1);
+fprintf(<span class="string">'    f0 = %+11.4f Hertz.\n'</span>,f0);
+fprintf(<span class="string">'    f1 = %+11.4f Hertz.\n'</span>,f1);
+</pre><pre class="codeoutput"> 
+The poles for the circuit are:
+    w0 =  +3000.0000 Radians/Second.
+    w1 = +20000.0000 Radians/Second.
+    f0 =   +477.4648 Hertz.
+    f1 =  +3183.0989 Hertz.
+</pre><p>Setup the matrices used to generate the Bode plots for the Ideal and Actual designs.</p><pre class="codeinput">G1_ideal = [ <span class="keyword">...</span>
+      (1)            (0)                         (0); <span class="keyword">...</span>
+      (-1/R1_ideal)  (1/R1_ideal + 1/R2_ideal)   (-1/R2_ideal); <span class="keyword">...</span>
+      (0)            (-1/R2_ideal)               (1/R2_ideal)];
+
+G2_ideal = [ <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (C1_ideal)                  (0); <span class="keyword">...</span>
+      (0)            (0)                         (C2_ideal)];
+
+
+G3_ideal = [ <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (0)                         (0)];
+
+
+G1_actual = [ <span class="keyword">...</span>
+      (1)            (0)                         (0); <span class="keyword">...</span>
+      (-1/R1_actual) (1/R1_actual + 1/R2_actual) (-1/R2_actual); <span class="keyword">...</span>
+      (0)            (-1/R2_actual)              (1/R2_actual)];
+
+
+G2_actual = [ <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (C1_actual)                 (0); <span class="keyword">...</span>
+      (0)            (0)                         (C2_actual)];
+
+
+G3_actual = [ <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (0)                         (0)];
+
+
+B = [VG;0;0];
+</pre><p>Locate the poles in the frequency vector for plotting purposes.</p><pre class="codeinput"><span class="comment">% Find the pole values.</span>
+pole_1 = 0;
+<span class="keyword">for</span> iter = 1:length(f)             <span class="comment">% Locate the first pole</span>
+    <span class="keyword">if</span> (f(iter) == f0)
+        pole_1 = iter;
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+pole_2 = 0;
+<span class="keyword">for</span> iter = pole_1+1:length(f)     <span class="comment">% Locate the second pole</span>
+    <span class="keyword">if</span> (f(iter) == f1)
+        pole_2 = iter;
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+</pre><p>Calculate the frequency response for the Ideal and Actual designs.</p><pre class="codeinput">Hw_ideal   = proj1E100_freqresp( G1_ideal,G2_ideal,G3_ideal,B,w,VG);
+Hw_actual  = proj1E100_freqresp( G1_actual,G2_actual,G3_actual,B,w,VG);
+
+<span class="comment">% Capture the values at the poles.</span>
+Hw_ideal_f0  = Hw_ideal(pole_1);
+Hw_ideal_f1  = Hw_ideal(pole_2);
+
+Hw_actual_f0 = Hw_actual(pole_1);
+Hw_actual_f1 = Hw_actual(pole_2);
+</pre><p>Generate the plot for <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq12222565629363593369.png" alt="$\displaystyle{H_{ideal}(f)}$"> and indicate where the two poles occur.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>,[<span class="string">'H(f) Ideal Design'</span>]);   <span class="comment">% Name the figure</span>
+
+Hw_ideal_Plot = <span class="keyword">...</span>
+      semilogx( f, Hw_ideal ,<span class="string">'-r'</span>);          <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': H_i_d_e_a_l(f)'</span>]);
+legend(<span class="string">'H_i_d_e_a_l(f)'</span>, <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+
+<span class="comment">% Add cursors to the plot.</span>
+makedatatip(Hw_ideal_Plot, [pole_1; pole_2]);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_01.png" alt=""> <p>Generate the plot for <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$"> and indicate where the two poles occur.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>,[<span class="string">'H(f) Actual Design'</span>]);  <span class="comment">% Name the figure</span>
+
+Hw_actual_Plot = <span class="keyword">...</span>
+      semilogx(f , Hw_actual ,<span class="string">'-b'</span>);         <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': H_a_c_t_u_a_l(f)'</span>]);
+legend(<span class="string">'H_a_c_t_u_a_l(f)'</span>, <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+
+<span class="comment">% Add cursors to the plot.</span>
+makedatatip(Hw_actual_Plot, [pole_1; pole_2]);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_02.png" alt=""> <p>Generate the plot for comparing <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq12222565629363593369.png" alt="$\displaystyle{H_{ideal}(f)}$"> and <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$">.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>, <span class="keyword">...</span>
+    [<span class="string">'H(f) Ideal and Actual Design'</span>]);       <span class="comment">% Name the figure</span>
+
+Hw_ideal_actual_Plot = <span class="keyword">...</span>
+    semilogx( f , Hw_ideal ,<span class="string">'-r'</span>, <span class="keyword">...</span>
+              f , Hw_actual ,<span class="string">'-b'</span>);          <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': H_i_d_e_a_l(f) and H_a_c_t_u_a_l(f)'</span>]);
+legend(<span class="string">'H_i_d_e_a_l(f)'</span>, <span class="string">'H_a_c_t_u_a_l(f)'</span>, <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_03.png" alt=""> <p>Calculate the percent difference between <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq12222565629363593369.png" alt="$\displaystyle{H_{ideal}(f)}$"> and <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$"> at the two poles.</p><pre class="codeinput">diff_0_ideal_actual = (abs(Hw_actual_f0) - abs(Hw_ideal_f0))/abs(Hw_ideal_f0)*100;
+diff_1_ideal_actual = (abs(Hw_actual_f1) - abs(Hw_ideal_f1))/abs(Hw_ideal_f1)*100;
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The difference between Ideal and Actual designs at the poles:'</span>);
+fprintf(<span class="string">'    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n'</span>, f0, Hw_ideal_f0);
+fprintf(<span class="string">'    Actual Design H(%+10.4f) = %+8.4f (dB).\n'</span>, f0, Hw_actual_f0);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_0_ideal_actual);
+fprintf(<span class="string">'    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n'</span>, f1, Hw_ideal_f1 );
+fprintf(<span class="string">'    Actual Design H(%+10.4f) = %+8.4f (dB).\n'</span>, f1, Hw_actual_f1 );
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_1_ideal_actual);
+</pre><pre class="codeoutput"> 
+The difference between Ideal and Actual designs at the poles:
+    Ideal  Design H( +477.4648) =  -3.1069 (dB).
+    Actual Design H( +477.4648) =  -2.9469 (dB).
+        % diff =  -5.1510 (%).
+    Ideal  Design H(+3183.0989) = -19.5851 (dB).
+    Actual Design H(+3183.0989) = -19.1496 (dB).
+        % diff =  -2.2234 (%).
+</pre><h2 id="14">Problem 4</h2><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_06_YourName_winter2015.png" alt=""> </p><pre class="codeinput">fignum = fignum+1;
+</pre><p>The LTSpice model for the circuit is shown below.</p><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_07_YourName_winter2015.png" alt=""> </p><pre class="codeinput">fignum = fignum+1;
+</pre><p>The LTSpice model for the simulation result is shown below.</p><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_08_YourName_winter2015.png" alt=""> </p><pre class="codeinput">fignum = fignum+1;
+</pre><p>Calculate the percent difference between <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$"> and <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq09745736759528424471.png" alt="$\displaystyle{H_{LTSpice}(f)}$"> actual designs at the two poles.</p><pre class="codeinput">Hw_ltspice_f0 =   -2.94  ;      <span class="comment">% dB</span>
+Hw_ltspice_f1 =   -19.14  ;      <span class="comment">% dB</span>
+f0_ltspice =      3000/(2*pi)       ;          <span class="comment">% Hertz</span>
+f1_ltspice =      20000/(2*pi)      ;          <span class="comment">% Hertz</span>
+
+diff_0_actual_ltspice =  (abs(f0_ltspice) - abs(Hw_actual_f0))/abs(Hw_actual_f0)*100;
+diff_1_actual_ltspice =  (abs(f1_ltspice) - abs(Hw_actual_f1))/abs(Hw_actual_f1)*100;
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The percent difference between MATLAB and LTSpice Actual'</span>);
+disp(<span class="string">'designs at the poles:'</span>);
+fprintf(<span class="string">'    Actual  MATLAB H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span><span class="comment">.</span>
+         f0, Hw_actual_f0);
+fprintf(<span class="string">'    Actual LTSpice H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+         f0_ltspice, Hw_ltspice_f0);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_0_actual_ltspice);
+fprintf(<span class="string">'    Actual  MATLAB H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+         f1, Hw_actual_f1);
+fprintf(<span class="string">'    Actual LTSpice H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+         f1_ltspice, Hw_ltspice_f1);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_1_actual_ltspice);
+</pre><pre class="codeoutput"> 
+The percent difference between MATLAB and LTSpice Actual
+designs at the poles:
+    Actual  MATLAB H( +477.4648) =  -2.9469 (dB).
+    Actual LTSpice H( +477.4648) =  -2.9400 (dB).
+        % diff = +16102.3129 (%).
+    Actual  MATLAB H(+3183.0989) = -19.1496 (dB).
+    Actual LTSpice H(+3183.0989) = -19.1400 (dB).
+        % diff = +16522.2317 (%).
+</pre><h2 id="18">Problem 5</h2><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_09_YourName_winter2015.png" alt=""> </p><pre class="codeinput">fignum = fignum+1;
+</pre><p>Vary the Actual design component values and calculate the frequency response for each variation.</p><pre class="codeinput"><span class="comment">% Declare the number of component value iterations.</span>
+value_sets =  5 ;
+
+<span class="comment">% Build the actual component vector</span>
+Q_actual = [R1_actual, R2_actual, C1_actual, C2_actual];
+
+<span class="comment">% Generate the frequency response values for the specified number of</span>
+<span class="comment">% iterations.</span>
+[Hw_actual_varied, Q_actual_varied] = <span class="keyword">...</span>
+             proj1E100_freqresp_varied( Q_actual,B,w,VG,value_sets);
+
+<span class="comment">% Capture the values at the poles.</span>
+Hw_actual_varied_f0 = zeros(1,value_sets);
+Hw_actual_varied_f1 = zeros(1,value_sets);
+<span class="keyword">for</span> iter = 1:value_sets
+    Hw_actual_varied_f0(iter)  = Hw_actual_varied(iter, pole_1);
+    Hw_actual_varied_f1(iter)  = Hw_actual_varied(iter, pole_2);
+<span class="keyword">end</span>;
+</pre><p>Generate the plot for variations in the Actual design component values and display all <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq10635530927751723122.png" alt="$\displaystyle{H_{varied}(f)}$"> curves on a single plot.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>, <span class="keyword">...</span>
+    [<span class="string">'H(f) Actual Design Varied'</span>]);          <span class="comment">% Name the figure</span>
+
+Hw_actual_varied_Plot = <span class="keyword">...</span>
+    semilogx( f , Hw_actual_varied );            <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': Varied H_a_c_t_u_a_l(f)'</span>]);
+legend(<span class="string">'H_1(f)'</span>, <span class="string">'H_2(f)'</span>, <span class="string">'H_3(f)'</span>, <span class="string">'H_4(f)'</span>, <span class="string">'H_5(f)'</span>, <span class="keyword">...</span>
+       <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_04.png" alt=""> <p>Calculate the percent difference between <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq10635530927751723122.png" alt="$\displaystyle{H_{varied}(f)}$"> and <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$"> at the two poles of each variation.</p><pre class="codeinput">diff_0_actual_varied = <span class="keyword">...</span>
+    (Hw_actual_varied_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_actual_varied = <span class="keyword">...</span>
+    (Hw_actual_varied_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The difference between Varied and Actual designs at the poles:'</span>);
+<span class="keyword">for</span> iter = 1:value_sets
+    diff_R1_actual_varied = <span class="keyword">...</span>
+        (Q_actual_varied(iter,1) - R1_actual)/abs(R1_actual)*100;
+    diff_R2_actual_varied = <span class="keyword">...</span>
+        (Q_actual_varied(iter,2) - R2_actual)/abs(R2_actual)*100;
+    diff_C1_actual_varied = <span class="keyword">...</span>
+        (Q_actual_varied(iter,3) - C1_actual)/abs(C1_actual)*100;
+    diff_C2_actual_varied = <span class="keyword">...</span>
+        (Q_actual_varied(iter,4) - C2_actual)/abs(C2_actual)*100;
+
+    fprintf(<span class="string">'    Variation Component Set %-2.u: \n'</span>, iter);
+    fprintf(<span class="string">'        R1 = %+11.4f Ohms,    %% diff = %+8.4f (%%).\n'</span>, <span class="keyword">...</span>
+            Q_actual_varied(iter,1), diff_R1_actual_varied);
+    fprintf(<span class="string">'        R2 = %+11.4f Ohms,    %% diff = %+8.4f (%%).\n'</span>, <span class="keyword">...</span>
+            Q_actual_varied(iter,2), diff_R2_actual_varied);
+    fprintf(<span class="string">'        C1 = %+11.4e Farads,  %% diff = %+8.4f (%%).\n'</span>, <span class="keyword">...</span>
+            Q_actual_varied(iter,3), diff_C1_actual_varied);
+    fprintf(<span class="string">'        C2 = %+11.4e Farads,  %% diff = %+8.4f (%%).\n'</span>, <span class="keyword">...</span>
+            Q_actual_varied(iter,4), diff_C2_actual_varied);
+    fprintf(<span class="string">'            Varied Design H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+            f0, Hw_actual_varied_f0(iter));
+    fprintf(<span class="string">'            Actual Design H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+            f0, Hw_actual_f0);
+    fprintf(<span class="string">'                %% diff = %+8.4f (%%).\n'</span>, <span class="keyword">...</span>
+            diff_0_actual_varied(iter));
+    fprintf(<span class="string">'            Varied Design H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+            f1, Hw_actual_varied_f1(iter));
+    fprintf(<span class="string">'            Actual Design H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+            f1, Hw_actual_f1);
+    fprintf(<span class="string">'                %% diff = %+8.4f (%%).\n'</span>, <span class="keyword">...</span>
+            diff_1_actual_varied(iter));
+<span class="keyword">end</span>;
+</pre><pre class="codeoutput"> 
+The difference between Varied and Actual designs at the poles:
+    Variation Component Set 1 : 
+        R1 =  +1128.7966 Ohms,    % diff =  -5.9336 (%).
+        R2 =  +1472.0309 Ohms,    % diff = +13.2331 (%).
+        C1 = +1.0341e-07 Farads,  % diff =  +3.4106 (%).
+        C2 = +1.0199e-07 Farads,  % diff =  +1.9889 (%).
+            Varied Design H( +477.4648) =  -3.0592 (dB).
+            Actual Design H( +477.4648) =  -2.9469 (dB).
+                % diff =  -3.8110 (%).
+            Varied Design H(+3183.0989) = -19.7536 (dB).
+            Actual Design H(+3183.0989) = -19.1496 (dB).
+                % diff =  -3.1537 (%).
+    Variation Component Set 2 : 
+        R1 =  +1400.2530 Ohms,    % diff = +16.6877 (%).
+        R2 =  +1188.6363 Ohms,    % diff =  -8.5664 (%).
+        C1 = +1.1029e-07 Farads,  % diff = +10.2880 (%).
+        C2 = +1.1015e-07 Farads,  % diff = +10.1492 (%).
+            Varied Design H( +477.4648) =  -3.8172 (dB).
+            Actual Design H( +477.4648) =  -2.9469 (dB).
+                % diff = -29.5337 (%).
+            Varied Design H(+3183.0989) = -21.0562 (dB).
+            Actual Design H(+3183.0989) = -19.1496 (dB).
+                % diff =  -9.9562 (%).
+    Variation Component Set 3 : 
+        R1 =  +1142.6140 Ohms,    % diff =  -4.7822 (%).
+        R2 =  +1335.2673 Ohms,    % diff =  +2.7129 (%).
+        C1 = +8.3034e-08 Farads,  % diff = -16.9658 (%).
+        C2 = +8.2158e-08 Farads,  % diff = -17.8420 (%).
+            Varied Design H( +477.4648) =  -2.1035 (dB).
+            Actual Design H( +477.4648) =  -2.9469 (dB).
+                % diff = +28.6214 (%).
+            Varied Design H(+3183.0989) = -16.5931 (dB).
+            Actual Design H(+3183.0989) = -19.1496 (dB).
+                % diff = +13.3504 (%).
+    Variation Component Set 4 : 
+        R1 =  +1214.7828 Ohms,    % diff =  +1.2319 (%).
+        R2 =  +1445.1670 Ohms,    % diff = +11.1667 (%).
+        C1 = +1.1736e-07 Farads,  % diff = +17.3604 (%).
+        C2 = +8.5196e-08 Farads,  % diff = -14.8038 (%).
+            Varied Design H( +477.4648) =  -2.8683 (dB).
+            Actual Design H( +477.4648) =  -2.9469 (dB).
+                % diff =  +2.6660 (%).
+            Varied Design H(+3183.0989) = -19.5797 (dB).
+            Actual Design H(+3183.0989) = -19.1496 (dB).
+                % diff =  -2.2456 (%).
+    Variation Component Set 5 : 
+        R1 =  +1233.0354 Ohms,    % diff =  +2.7529 (%).
+        R2 =  +1284.0831 Ohms,    % diff =  -1.2244 (%).
+        C1 = +8.0476e-08 Farads,  % diff = -19.5239 (%).
+        C2 = +9.3485e-08 Farads,  % diff =  -6.5151 (%).
+            Varied Design H( +477.4648) =  -2.5632 (dB).
+            Actual Design H( +477.4648) =  -2.9469 (dB).
+                % diff = +13.0201 (%).
+            Varied Design H(+3183.0989) = -17.7041 (dB).
+            Actual Design H(+3183.0989) = -19.1496 (dB).
+                % diff =  +7.5485 (%).
+</pre><h2 id="22">Problem 6</h2><p><img vspace="5" hspace="5" src="ELEN100L_Project_1_figure_11_YourName_winter2015.png" alt=""> </p><pre class="codeinput">fignum = fignum+1;
+</pre><p>Display the measured values for the components used in the Actual design.</p><pre class="codeinput">R1_meas =    1.1980*10^3        ;   <span class="comment">% Ohms</span>
+R2_meas =    1.2841*10^3        ;   <span class="comment">% Ohms</span>
+C1_meas =    0.1048*10^-6       ;   <span class="comment">% Farads</span>
+C2_meas =    0.0989*10^-6       ;   <span class="comment">% Farads</span>
+
+disp(<span class="string">' '</span>);
+fprintf(<span class="string">'Measured component values are:\n'</span>);
+fprintf(<span class="string">'    R1 = %+11.4f Ohms.\n'</span>, R1_meas);
+fprintf(<span class="string">'    R2 = %+11.4f Ohms.\n'</span>, R2_meas);
+fprintf(<span class="string">'    C1 = %+11.4e Farads.\n'</span>, C1_meas);
+fprintf(<span class="string">'    C2 = %+11.4e Farads.\n'</span>, C2_meas);
+</pre><pre class="codeoutput"> 
+Measured component values are:
+    R1 =  +1198.0000 Ohms.
+    R2 =  +1284.1000 Ohms.
+    C1 = +1.0480e-07 Farads.
+    C2 = +9.8900e-08 Farads.
+</pre><p>Compute the percent differences between the Measured and Actual design component values.</p><pre class="codeinput">diff_R1_meas_actual =  (R1_meas - R1_actual)/abs(R1_actual)*100;
+diff_R2_meas_actual =  (R2_meas - R2_actual)/abs(R2_actual)*100;
+diff_C1_meas_actual =  (C1_meas - C1_actual)/abs(C1_actual)*100;
+diff_C2_meas_actual =  (C2_meas - C2_actual)/abs(C2_actual)*100;
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The percent difference between Measured and Actual design'</span>);
+disp(<span class="string">'component values:'</span>);
+fprintf(<span class="string">'    %% diff R1 = %+8.4f (%%).\n'</span>, diff_R1_meas_actual);
+fprintf(<span class="string">'    %% diff R2 = %+8.4f (%%).\n'</span>, diff_R2_meas_actual);
+fprintf(<span class="string">'    %% diff C1 = %+8.4f (%%).\n'</span>, diff_C1_meas_actual);
+fprintf(<span class="string">'    %% diff C2 = %+8.4f (%%).\n'</span>, diff_C2_meas_actual);
+</pre><pre class="codeoutput"> 
+The percent difference between Measured and Actual design
+component values:
+    % diff R1 =  -0.1667 (%).
+    % diff R2 =  -1.2231 (%).
+    % diff C1 =  +4.8000 (%).
+    % diff C2 =  -1.1000 (%).
+</pre><p>Import the measured data for processing.</p><p>The measured values for frequency response are contained in the external Excel spreadsheet file named "ELEN100L_Project_1_Measured_Results_Lab.xlsx". These measured values are imported into MATLAB at run-time using MATLAB's <b>Import</b> feature. For the solution shown below, the initial "import" was executed to generate an external function file which can be called at run-time.</p><pre class="codeinput">[freq_meas,Vg_meas,Vo_meas] = importfile_problem6<span class="keyword">...</span>
+    (<span class="string">'ELEN100L_Project_1_Measured_Results_Lab.xlsx'</span>,<span class="string">'Sheet1'</span>,2,81);
+
+<span class="comment">% Convert the measured column vectors to single row vectors.</span>
+dim = size(freq_meas);   rows = 1;     columns = dim(1,1);
+freq_meas = reshape(freq_meas, rows, dim(1,1));
+Vg_meas   = reshape(Vg_meas  , rows, dim(1,1));
+Vo_meas   = reshape(Vo_meas  , rows, dim(1,1));
+</pre><p>Locate the poles in the frequency vector for plotting purposes.</p><pre class="codeinput">converge_criteria = 1.0;
+
+<span class="comment">% Find the pole values.</span>
+pole_1_meas = 0;
+<span class="keyword">for</span> iter = 1:length(freq_meas)            <span class="comment">% Locate the first pole</span>
+    <span class="keyword">if</span> (abs(freq_meas(iter) - f0) &lt;= converge_criteria)
+        pole_1_meas = iter;
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>;
+<span class="keyword">end</span>;
+
+pole_2_meas = 0;
+<span class="keyword">for</span> iter = pole_1_meas+1:length(freq_meas)     <span class="comment">% Locate the second pole</span>
+    <span class="keyword">if</span> (abs(freq_meas(iter) - f1) &lt;= converge_criteria)
+        pole_2_meas = iter;
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>;
+<span class="keyword">end</span>;
+</pre><p>Calculate the frequency response for the Measured Actual design.</p><pre class="codeinput">Hw_meas_actual = 20*log10(abs(Vo_meas)./abs(Vg_meas)) ;  <span class="comment">% |H(w)| in decibels (dB) is a function9</span>
+<span class="comment">% of Vo_meas and Vg_meas</span>
+
+<span class="comment">% This section of code is used to generate an expected frequency response</span>
+<span class="comment">% based upon the measured component values.</span>
+G1_sim_meas_actual = [ <span class="keyword">...</span>
+      (1)            (0)                         (0); <span class="keyword">...</span>
+      (-1/R1_meas)   (1/R1_meas + 1/R2_meas)     (-1/R2_meas); <span class="keyword">...</span>
+      (0)            (-1/R2_actual)              (1/R2_meas)];
+
+G2_sim_meas_actual = [ <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (C1_meas)                   (0); <span class="keyword">...</span>
+      (0)            (0)                         (C2_meas)];
+
+G3_sim_meas_actual = [ <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (0)                         (0); <span class="keyword">...</span>
+      (0)            (0)                         (0)];
+
+Hw_sim_meas_actual = <span class="keyword">...</span>
+    proj1E100_freqresp(G1_sim_meas_actual, G2_sim_meas_actual,<span class="keyword">...</span>
+                       G3_sim_meas_actual, B, 2*pi*freq_meas, VG);
+
+<span class="comment">% Capture the values at the poles.</span>
+Hw_meas_actual_f0 = Hw_meas_actual(pole_1_meas);
+Hw_meas_actual_f1 = Hw_meas_actual(pole_2_meas);
+
+Hw_sim_meas_actual_f0 = Hw_sim_meas_actual(pole_1_meas);
+Hw_sim_meas_actual_f1 = Hw_sim_meas_actual(pole_2_meas);
+</pre><p>Generate the plot for <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq17361984656339718576.png" alt="$\displaystyle{H_{measured}(f)}$"> and indicate where the two poles occur.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>, <span class="keyword">...</span>
+    [<span class="string">'H(f) Measured Actual Design'</span>]);        <span class="comment">% Name the figure</span>
+
+Hw_meas_actual_Plot = semilogx(<span class="keyword">...</span>
+          freq_meas , Hw_meas_actual,<span class="string">'-m'</span>);      <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': H_m_e_a_s_u_r_e_d(f)'</span>]);
+legend(<span class="string">'H_m_e_a_s_u_r_e_d(f)'</span>, <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+
+<span class="comment">% Add cursors to the plot.</span>
+makedatatip(Hw_meas_actual_Plot, [pole_1_meas; pole_2_meas]);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_05.png" alt=""> <p>Generate the plot for <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq15696004650094274060.png" alt="$\displaystyle{H_{simulate measured}(f)}$"> and indicate where the two poles occur.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>, <span class="keyword">...</span>
+  [<span class="string">'H(f) Simulate Measured Actual Design'</span>]); <span class="comment">% Name the figure</span>
+
+Hw_sim_meas_actual_Plot = semilogx(<span class="keyword">...</span>
+         freq_meas , Hw_sim_meas_actual,<span class="string">'-g'</span>);       <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': H_s_i_m_ _m_e_a_s(f)'</span>]);
+legend(<span class="string">'H_s_i_m_ _m_e_a_s(f)'</span>, <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+
+<span class="comment">% Add cursors to the plot.</span>
+makedatatip(Hw_sim_meas_actual_Plot, [pole_1_meas; pole_2_meas]);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_06.png" alt=""> <p>Generate the plot for comparing <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq17361984656339718576.png" alt="$\displaystyle{H_{measured}(f)}$">, <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq15696004650094274060.png" alt="$\displaystyle{H_{simulate measured}(f)}$"> and <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$">.</p><pre class="codeinput">fignum = fignum+1; figObj = figure(fignum);  <span class="comment">% Establish a figure number</span>
+set(fignum, <span class="string">'Name'</span>, <span class="keyword">...</span>
+    [<span class="string">'H(f) Measured and Actual Design'</span>]);    <span class="comment">% Name the figure</span>
+
+semilogx( f, Hw_actual,<span class="string">'-b'</span>,<span class="keyword">...</span>
+          freq_meas, Hw_meas_actual,<span class="string">'-m'</span>, <span class="keyword">...</span>
+          freq_meas, Hw_sim_meas_actual,<span class="string">'-g'</span>);       <span class="comment">% Generate plot</span>
+grid <span class="string">on</span>;                                     <span class="comment">% Turn grid on</span>
+xlabel(<span class="string">'Frequency (Hz)'</span>);                    <span class="comment">% Label the x-axis</span>
+ylabel(<span class="string">'Amplitude (dB)'</span>);                    <span class="comment">% Label the y-axis</span>
+axis([plot_left, plot_right, <span class="keyword">...</span>
+      plot_bottom, plot_top]);               <span class="comment">% Bound plot</span>
+title([<span class="string">'Figure '</span>,num2str(fignum,<span class="string">'%-2.u'</span>),<span class="keyword">...</span>
+       <span class="string">': H_a_c_t_u_a_l(f), H_m_e_a_s(f), and H_s_i_m_ _m_e_a_s(f)'</span>]);
+legend(<span class="string">'H_a_c_t_u_a_l(f)'</span>, <span class="string">'H_m_e_a_s(f)'</span>, <span class="keyword">...</span>
+       <span class="string">'H_s_i_m_ _m_e_a_s(f)'</span>,<span class="keyword">...</span>
+       <span class="string">'Location'</span>, <span class="string">'NorthEast'</span>);
+</pre><img vspace="5" hspace="5" src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_07.png" alt=""> <p>Calculate the percent difference between <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq17361984656339718576.png" alt="$\displaystyle{H_{measured}(f)}$">, <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq15696004650094274060.png" alt="$\displaystyle{H_{simulate measured}(f)}$">, and <img src="ELEN100L_Project_1_Shane_Buck_Thomas_Heckman_eq03646643128747066260.png" alt="$\displaystyle{H_{actual}(f)}$"> actual designs at the two poles.</p><pre class="codeinput">f0_measured = freq_meas(pole_1_meas);         <span class="comment">% Hertz</span>
+f1_measured = freq_meas(pole_2_meas);         <span class="comment">% Hertz</span>
+
+diff_0_meas_actual = <span class="keyword">...</span>
+    (Hw_meas_actual_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_meas_actual = <span class="keyword">...</span>
+    (Hw_meas_actual_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
+
+diff_0_sim_meas_actual = <span class="keyword">...</span>
+    (Hw_sim_meas_actual_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_sim_meas_actual = <span class="keyword">...</span>
+    (Hw_sim_meas_actual_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The percent difference between MATLAB and Measured Actual'</span>);
+disp(<span class="string">'designs at the poles:'</span>);
+fprintf(<span class="string">'    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span><span class="comment">.</span>
+        f0, Hw_actual_f0);
+fprintf(<span class="string">'    Actual   Measured H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+        f0_measured, Hw_meas_actual_f0);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_0_meas_actual);
+fprintf(<span class="string">'    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span><span class="comment">.</span>
+        f1, Hw_actual_f1);
+fprintf(<span class="string">'    Actual   Measured H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+        f1_measured, Hw_meas_actual_f1);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_1_meas_actual);
+
+disp(<span class="string">' '</span>);
+disp(<span class="string">'The percent difference between MATLAB and the simulated'</span>);
+disp(<span class="string">'Measured Actual designs at the poles:'</span>);
+fprintf(<span class="string">'    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span><span class="comment">.</span>
+        f0, Hw_actual_f0);
+fprintf(<span class="string">'    Simulate Measured H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+        f0_measured, Hw_sim_meas_actual_f0);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_0_sim_meas_actual);
+fprintf(<span class="string">'    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+        f1, Hw_actual_f1);
+fprintf(<span class="string">'    Simulate Measured H(%+10.4f) = %+8.4f (dB).\n'</span>, <span class="keyword">...</span>
+        f1_measured, Hw_sim_meas_actual_f1);
+fprintf(<span class="string">'        %% diff = %+8.4f (%%).\n'</span>, diff_1_sim_meas_actual);
+</pre><pre class="codeoutput"> 
+The percent difference between MATLAB and Measured Actual
+designs at the poles:
+    Actual     MATLAB H( +477.4648) =  -2.9469 (dB).
+    Actual   Measured H( +477.4648) =  -3.0112 (dB).
+        % diff =  -2.1822 (%).
+    Actual     MATLAB H(+3183.0989) = -19.1496 (dB).
+    Actual   Measured H(+3183.0989) = -18.5927 (dB).
+        % diff =  +2.9084 (%).
+ 
+The percent difference between MATLAB and the simulated
+Measured Actual designs at the poles:
+    Actual     MATLAB H( +477.4648) =  -2.9469 (dB).
+    Simulate Measured H( +477.4648) =  -3.1003 (dB).
+        % diff =  -5.2057 (%).
+    Actual     MATLAB H(+3183.0989) = -19.1496 (dB).
+    Simulate Measured H(+3183.0989) = -19.3426 (dB).
+        % diff =  -1.0078 (%).
+</pre><h2 id="32">Program execution complete</h2><pre class="codeinput">disp(<span class="string">' '</span>);
+disp(<span class="string">'Program execution complete....'</span>);
+</pre><pre class="codeoutput"> 
+Program execution complete....
+</pre><h2 id="33">MATLAB code listing</h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ELEN 100L (Electric Circuits II): Project 1, Shane Buck, Thomas Heckman
+%
+% <<ELEN100L_Project_1_figure_01_your_name_winter2015.png>>
+%
+% *Hard Copy Deliverables:*
+%
+% # Hard copy for hand calculations.
+% # A MATLAB script and publish the solution using MATLAB's *publish*
+% feature.
+% # Turn in MATLAB scripts and a document of the run-time results.
+% # Turn in the Excel file with the measured results.
+%
+% *Soft Copy Deliverables:*
+%
+% # Turn in MATLAB files.
+% # Turn in LTSpice files.
+% # Turn in the Excel file with the measured results.
+%
+
+%% Initialize MATLAB Environment
+%
+
+clear; clc; clf; cla; close all;
+format long; format compact;
+
+%% Setup global variables
+%
+
+% These Ideal Design element values are fixed in the circuit.
+VG  =  1                   ;    % Generator voltage
+R1_ideal =      1250       ;    % Ohms
+R2_ideal =      1333.33    ;    % Ohms
+C1_ideal =      0.1*10^-6  ;    % Farads
+C2_ideal =      0.1*10^-6  ;    % Farads
+
+% These Actual Design element values are fixed in the circuit.
+R1_actual =     1200       ;    % Ohms
+R2_actual =     1300       ;    % Ohms
+C1_actual =     0.1*10^-6  ;    % Farads
+C2_actual =     0.1*10^-6  ;    % Farads
+
+% Setup values for the poles.
+w0 =     3000   ;        % Radians/Second
+w1 =     20000   ;        % Radians/Second
+f0 =     (3000/(2*pi))   ;        % Hertz
+f1 =     (20000/(2*pi))   ;        % Hertz
+
+% Build an array for the angular frequency and convert it to Hertz.
+dw = 10;                   % Step size for analysis
+w = [1:dw:w0-dw, ...
+     w0, ...
+     w0+dw:dw:w1-dw, ...
+     w1, ...
+     w1+dw:dw:1.0e6];      % Radians/Second (ensure poles are included)
+
+ f =      w/(2*pi)     ;            % Hertz
+
+% These values are used for plotting purposes.
+fignum = 1;
+plot_left   = 1;       plot_right = 2e5;    % x-axis range (Hertz)
+plot_bottom = -90;     plot_top   = 5;      % y-axis range (dB)
+
+%% Problem 3
+%
+% <<ELEN100L_Project_1_figure_02_YourName_winter2015.png>>
+%
+
+fignum = fignum+1;
+
+%%
+% Display the component values for the Ideal and Actual designs.
+%
+
+disp(' ');
+disp('The Ideal Design component values are:');
+fprintf('    R1 = %+11.4f Ohms.\n',  R1_ideal  );
+fprintf('    R2 = %+11.4f Ohms.\n',  R2_ideal  );
+fprintf('    C1 = %+11.4e Farads.\n', C1_ideal  );
+fprintf('    C2 = %+11.4e Farads.\n', C2_ideal  );
+
+disp(' ');
+disp('The Actual Design component values are:');
+fprintf('    R1 = %+11.4f Ohms.\n',  R1_actual  );
+fprintf('    R2 = %+11.4f Ohms.\n',  R2_actual  );
+fprintf('    C1 = %+11.4e Farads.\n', C1_actual );
+fprintf('    C2 = %+11.4e Farads.\n', C2_actual );
+
+%%
+% Compute the percent differences between the Ideal and Actual design
+% component values.
+%
+
+diff_R1_ideal_actual = ( R1_actual - R1_ideal )/abs(R1_ideal)*100;
+diff_R2_ideal_actual = ( R2_actual - R2_ideal )/abs(R2_ideal)*100;
+diff_C1_ideal_actual = ( C1_actual - C1_ideal )/abs(C1_ideal)*100;
+diff_C2_ideal_actual = ( C2_actual - C2_ideal )/abs(C2_ideal)*100;
+
+disp(' ');
+disp('The percent difference between Ideal and Actual design');
+disp('component values:');
+fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_ideal_actual );
+fprintf('    %% diff R2 = %+8.4f (%%).\n', diff_R2_ideal_actual );
+fprintf('    %% diff C1 = %+8.4f (%%).\n', diff_C1_ideal_actual );
+fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_ideal_actual );
+
+%%
+% Display the poles for the target circuit design transfer function.
+%
+
+disp(' ');
+disp('The poles for the circuit are:');
+fprintf('    w0 = %+11.4f Radians/Second.\n',w0);
+fprintf('    w1 = %+11.4f Radians/Second.\n',w1);
+fprintf('    f0 = %+11.4f Hertz.\n',f0);
+fprintf('    f1 = %+11.4f Hertz.\n',f1);
+
+%%
+% Setup the matrices used to generate the Bode plots for the Ideal and
+% Actual designs.
+%
+
+G1_ideal = [ ...
+      (1)            (0)                         (0); ...
+      (-1/R1_ideal)  (1/R1_ideal + 1/R2_ideal)   (-1/R2_ideal); ...
+      (0)            (-1/R2_ideal)               (1/R2_ideal)];
+
+G2_ideal = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (C1_ideal)                  (0); ...
+      (0)            (0)                         (C2_ideal)];
+
+
+G3_ideal = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0)];
+
+
+G1_actual = [ ...
+      (1)            (0)                         (0); ...
+      (-1/R1_actual) (1/R1_actual + 1/R2_actual) (-1/R2_actual); ...
+      (0)            (-1/R2_actual)              (1/R2_actual)];
+
+
+G2_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (C1_actual)                 (0); ...
+      (0)            (0)                         (C2_actual)];
+
+
+G3_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0)];
+
+  
+B = [VG;0;0];
+
+%%
+% Locate the poles in the frequency vector for plotting purposes.
+%
+
+% Find the pole values.
+pole_1 = 0;
+for iter = 1:length(f)             % Locate the first pole
+    if (f(iter) == f0)
+        pole_1 = iter;
+        break;
+    end
+end
+
+pole_2 = 0;
+for iter = pole_1+1:length(f)     % Locate the second pole
+    if (f(iter) == f1)
+        pole_2 = iter;
+        break;
+    end
+end
+
+%%
+% Calculate the frequency response for the Ideal and Actual designs.
+%
+
+Hw_ideal   = proj1E100_freqresp( G1_ideal,G2_ideal,G3_ideal,B,w,VG);
+Hw_actual  = proj1E100_freqresp( G1_actual,G2_actual,G3_actual,B,w,VG);
+
+% Capture the values at the poles.
+Hw_ideal_f0  = Hw_ideal(pole_1);
+Hw_ideal_f1  = Hw_ideal(pole_2);
+
+Hw_actual_f0 = Hw_actual(pole_1);
+Hw_actual_f1 = Hw_actual(pole_2);
+
+%%
+% Generate the plot for $\displaystyle{H_{ideal}(f)}$ and indicate where
+% the two poles occur.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name',['H(f) Ideal Design']);   % Name the figure
+
+Hw_ideal_Plot = ...
+      semilogx( f, Hw_ideal ,'-r');          % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': H_i_d_e_a_l(f)']);
+legend('H_i_d_e_a_l(f)', 'Location', 'NorthEast');
+
+% Add cursors to the plot.
+makedatatip(Hw_ideal_Plot, [pole_1; pole_2]);
+
+%%
+% Generate the plot for $\displaystyle{H_{actual}(f)}$ and indicate where
+% the two poles occur.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name',['H(f) Actual Design']);  % Name the figure
+
+Hw_actual_Plot = ...
+      semilogx(f , Hw_actual ,'-b');         % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': H_a_c_t_u_a_l(f)']);
+legend('H_a_c_t_u_a_l(f)', 'Location', 'NorthEast');
+
+% Add cursors to the plot.
+makedatatip(Hw_actual_Plot, [pole_1; pole_2]);
+
+%%
+% Generate the plot for comparing $\displaystyle{H_{ideal}(f)}$ and
+% $\displaystyle{H_{actual}(f)}$.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name', ...
+    ['H(f) Ideal and Actual Design']);       % Name the figure
+
+Hw_ideal_actual_Plot = ...
+    semilogx( f , Hw_ideal ,'-r', ...
+              f , Hw_actual ,'-b');          % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': H_i_d_e_a_l(f) and H_a_c_t_u_a_l(f)']);
+legend('H_i_d_e_a_l(f)', 'H_a_c_t_u_a_l(f)', 'Location', 'NorthEast');
+
+%%
+% Calculate the percent difference between $\displaystyle{H_{ideal}(f)}$
+% and $\displaystyle{H_{actual}(f)}$ at the two poles.
+%
+
+diff_0_ideal_actual = (abs(Hw_actual_f0) - abs(Hw_ideal_f0))/abs(Hw_ideal_f0)*100;
+diff_1_ideal_actual = (abs(Hw_actual_f1) - abs(Hw_ideal_f1))/abs(Hw_ideal_f1)*100;
+
+disp(' ');
+disp('The difference between Ideal and Actual designs at the poles:');
+fprintf('    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n', f0, Hw_ideal_f0);
+fprintf('    Actual Design H(%+10.4f) = %+8.4f (dB).\n', f0, Hw_actual_f0);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_0_ideal_actual);
+fprintf('    Ideal  Design H(%+10.4f) = %+8.4f (dB).\n', f1, Hw_ideal_f1 );
+fprintf('    Actual Design H(%+10.4f) = %+8.4f (dB).\n', f1, Hw_actual_f1 );
+fprintf('        %% diff = %+8.4f (%%).\n', diff_1_ideal_actual);
+
+%% Problem 4
+%
+% <<ELEN100L_Project_1_figure_06_YourName_winter2015.png>>
+%
+
+fignum = fignum+1;
+
+%%
+% The LTSpice model for the circuit is shown below.
+%
+% <<ELEN100L_Project_1_figure_07_YourName_winter2015.png>>
+%
+
+fignum = fignum+1;
+
+%%
+% The LTSpice model for the simulation result is shown below.
+%
+% <<ELEN100L_Project_1_figure_08_YourName_winter2015.png>>
+%
+
+fignum = fignum+1;
+
+%%
+% Calculate the percent difference between $\displaystyle{H_{actual}(f)}$
+% and $\displaystyle{H_{LTSpice}(f)}$ actual designs at the two poles.
+
+Hw_ltspice_f0 =   -2.94  ;      % dB
+Hw_ltspice_f1 =   -19.14  ;      % dB
+f0_ltspice =      3000/(2*pi)       ;          % Hertz
+f1_ltspice =      20000/(2*pi)      ;          % Hertz
+
+diff_0_actual_ltspice =  (abs(f0_ltspice) - abs(Hw_actual_f0))/abs(Hw_actual_f0)*100;
+diff_1_actual_ltspice =  (abs(f1_ltspice) - abs(Hw_actual_f1))/abs(Hw_actual_f1)*100;
+
+disp(' '); 
+disp('The percent difference between MATLAB and LTSpice Actual');
+disp('designs at the poles:');
+fprintf('    Actual  MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
+         f0, Hw_actual_f0);
+fprintf('    Actual LTSpice H(%+10.4f) = %+8.4f (dB).\n', ...
+         f0_ltspice, Hw_ltspice_f0);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_0_actual_ltspice);
+fprintf('    Actual  MATLAB H(%+10.4f) = %+8.4f (dB).\n', ...
+         f1, Hw_actual_f1);
+fprintf('    Actual LTSpice H(%+10.4f) = %+8.4f (dB).\n', ...
+         f1_ltspice, Hw_ltspice_f1);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_1_actual_ltspice);
+
+%% Problem 5
+%
+% <<ELEN100L_Project_1_figure_09_YourName_winter2015.png>>
+%
+
+fignum = fignum+1;
+
+%%
+% Vary the Actual design component values and calculate the frequency
+% response for each variation.
+%
+
+% Declare the number of component value iterations.
+value_sets =  5 ;
+
+% Build the actual component vector
+Q_actual = [R1_actual, R2_actual, C1_actual, C2_actual];
+
+% Generate the frequency response values for the specified number of
+% iterations.
+[Hw_actual_varied, Q_actual_varied] = ...
+             proj1E100_freqresp_varied( Q_actual,B,w,VG,value_sets);
+
+% Capture the values at the poles.
+Hw_actual_varied_f0 = zeros(1,value_sets);
+Hw_actual_varied_f1 = zeros(1,value_sets);
+for iter = 1:value_sets
+    Hw_actual_varied_f0(iter)  = Hw_actual_varied(iter, pole_1);
+    Hw_actual_varied_f1(iter)  = Hw_actual_varied(iter, pole_2);
+end;
+
+%%
+% Generate the plot for variations in the Actual design component values
+% and display all $\displaystyle{H_{varied}(f)}$ curves on a single plot.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name', ...
+    ['H(f) Actual Design Varied']);          % Name the figure
+
+Hw_actual_varied_Plot = ...
+    semilogx( f , Hw_actual_varied );            % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': Varied H_a_c_t_u_a_l(f)']);
+legend('H_1(f)', 'H_2(f)', 'H_3(f)', 'H_4(f)', 'H_5(f)', ...
+       'Location', 'NorthEast');
+   
+%%
+% Calculate the percent difference between $\displaystyle{H_{varied}(f)}$
+% and $\displaystyle{H_{actual}(f)}$ at the two poles of each variation.
+%
+
+diff_0_actual_varied = ...
+    (Hw_actual_varied_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_actual_varied = ...
+    (Hw_actual_varied_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
+
+disp(' ');
+disp('The difference between Varied and Actual designs at the poles:');
+for iter = 1:value_sets
+    diff_R1_actual_varied = ...
+        (Q_actual_varied(iter,1) - R1_actual)/abs(R1_actual)*100;
+    diff_R2_actual_varied = ...
+        (Q_actual_varied(iter,2) - R2_actual)/abs(R2_actual)*100;
+    diff_C1_actual_varied = ...
+        (Q_actual_varied(iter,3) - C1_actual)/abs(C1_actual)*100;
+    diff_C2_actual_varied = ...
+        (Q_actual_varied(iter,4) - C2_actual)/abs(C2_actual)*100;
+
+    fprintf('    Variation Component Set %-2.u: \n', iter);
+    fprintf('        R1 = %+11.4f Ohms,    %% diff = %+8.4f (%%).\n', ...
+            Q_actual_varied(iter,1), diff_R1_actual_varied);
+    fprintf('        R2 = %+11.4f Ohms,    %% diff = %+8.4f (%%).\n', ...
+            Q_actual_varied(iter,2), diff_R2_actual_varied);
+    fprintf('        C1 = %+11.4e Farads,  %% diff = %+8.4f (%%).\n', ...
+            Q_actual_varied(iter,3), diff_C1_actual_varied);
+    fprintf('        C2 = %+11.4e Farads,  %% diff = %+8.4f (%%).\n', ...
+            Q_actual_varied(iter,4), diff_C2_actual_varied);
+    fprintf('            Varied Design H(%+10.4f) = %+8.4f (dB).\n', ...
+            f0, Hw_actual_varied_f0(iter));
+    fprintf('            Actual Design H(%+10.4f) = %+8.4f (dB).\n', ...
+            f0, Hw_actual_f0);
+    fprintf('                %% diff = %+8.4f (%%).\n', ...
+            diff_0_actual_varied(iter));
+    fprintf('            Varied Design H(%+10.4f) = %+8.4f (dB).\n', ...
+            f1, Hw_actual_varied_f1(iter));
+    fprintf('            Actual Design H(%+10.4f) = %+8.4f (dB).\n', ...
+            f1, Hw_actual_f1);
+    fprintf('                %% diff = %+8.4f (%%).\n', ...
+            diff_1_actual_varied(iter));
+end;
+
+%% Problem 6
+%
+% <<ELEN100L_Project_1_figure_11_YourName_winter2015.png>>
+%
+
+fignum = fignum+1;
+
+%%
+% Display the measured values for the components used in the Actual
+% design.
+%
+R1_meas =    1.1980*10^3        ;   % Ohms
+R2_meas =    1.2841*10^3        ;   % Ohms
+C1_meas =    0.1048*10^-6       ;   % Farads
+C2_meas =    0.0989*10^-6       ;   % Farads
+
+disp(' ');
+fprintf('Measured component values are:\n');
+fprintf('    R1 = %+11.4f Ohms.\n', R1_meas);
+fprintf('    R2 = %+11.4f Ohms.\n', R2_meas);
+fprintf('    C1 = %+11.4e Farads.\n', C1_meas);
+fprintf('    C2 = %+11.4e Farads.\n', C2_meas);
+
+%%
+% Compute the percent differences between the Measured and Actual design
+% component values.
+%
+
+diff_R1_meas_actual =  (R1_meas - R1_actual)/abs(R1_actual)*100;
+diff_R2_meas_actual =  (R2_meas - R2_actual)/abs(R2_actual)*100;
+diff_C1_meas_actual =  (C1_meas - C1_actual)/abs(C1_actual)*100;
+diff_C2_meas_actual =  (C2_meas - C2_actual)/abs(C2_actual)*100;
+
+disp(' ');
+disp('The percent difference between Measured and Actual design');
+disp('component values:');
+fprintf('    %% diff R1 = %+8.4f (%%).\n', diff_R1_meas_actual);
+fprintf('    %% diff R2 = %+8.4f (%%).\n', diff_R2_meas_actual);
+fprintf('    %% diff C1 = %+8.4f (%%).\n', diff_C1_meas_actual);
+fprintf('    %% diff C2 = %+8.4f (%%).\n', diff_C2_meas_actual);
+
+%%
+% Import the measured data for processing.
+%
+% The measured values for frequency response are contained in the external
+% Excel spreadsheet file named "ELEN100L_Project_1_Measured_Results_Lab.xlsx".
+% These measured values are imported into MATLAB at run-time using MATLAB's
+% *Import* feature. For the solution shown below, the initial "import" was
+% executed to generate an external function file which can be called at
+% run-time.
+%
+
+[freq_meas,Vg_meas,Vo_meas] = importfile_problem6...
+    ('ELEN100L_Project_1_Measured_Results_Lab.xlsx','Sheet1',2,81);
+
+% Convert the measured column vectors to single row vectors.
+dim = size(freq_meas);   rows = 1;     columns = dim(1,1);
+freq_meas = reshape(freq_meas, rows, dim(1,1));
+Vg_meas   = reshape(Vg_meas  , rows, dim(1,1));
+Vo_meas   = reshape(Vo_meas  , rows, dim(1,1));
+
+%%
+% Locate the poles in the frequency vector for plotting purposes.
+%
+
+converge_criteria = 1.0;
+
+% Find the pole values.
+pole_1_meas = 0;
+for iter = 1:length(freq_meas)            % Locate the first pole
+    if (abs(freq_meas(iter) - f0) <= converge_criteria)
+        pole_1_meas = iter;
+        break;
+    end;
+end;
+
+pole_2_meas = 0;
+for iter = pole_1_meas+1:length(freq_meas)     % Locate the second pole
+    if (abs(freq_meas(iter) - f1) <= converge_criteria)
+        pole_2_meas = iter;
+        break;
+    end;
+end;
+
+%%
+% Calculate the frequency response for the Measured Actual design.
+%
+
+Hw_meas_actual = 20*log10(abs(Vo_meas)./abs(Vg_meas)) ;  % |H(w)| in decibels (dB) is a function9
+% of Vo_meas and Vg_meas
+
+% This section of code is used to generate an expected frequency response
+% based upon the measured component values.
+G1_sim_meas_actual = [ ...
+      (1)            (0)                         (0); ...
+      (-1/R1_meas)   (1/R1_meas + 1/R2_meas)     (-1/R2_meas); ...
+      (0)            (-1/R2_actual)              (1/R2_meas)];
+
+G2_sim_meas_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (C1_meas)                   (0); ...
+      (0)            (0)                         (C2_meas)];
+
+G3_sim_meas_actual = [ ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0); ...
+      (0)            (0)                         (0)];
+
+Hw_sim_meas_actual = ...
+    proj1E100_freqresp(G1_sim_meas_actual, G2_sim_meas_actual,...
+                       G3_sim_meas_actual, B, 2*pi*freq_meas, VG);
+
+% Capture the values at the poles.
+Hw_meas_actual_f0 = Hw_meas_actual(pole_1_meas);
+Hw_meas_actual_f1 = Hw_meas_actual(pole_2_meas);
+
+Hw_sim_meas_actual_f0 = Hw_sim_meas_actual(pole_1_meas);
+Hw_sim_meas_actual_f1 = Hw_sim_meas_actual(pole_2_meas);
+
+%%
+% Generate the plot for $\displaystyle{H_{measured}(f)}$ and indicate where
+% the two poles occur.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name', ...
+    ['H(f) Measured Actual Design']);        % Name the figure
+
+Hw_meas_actual_Plot = semilogx(...
+          freq_meas , Hw_meas_actual,'-m');      % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': H_m_e_a_s_u_r_e_d(f)']);
+legend('H_m_e_a_s_u_r_e_d(f)', 'Location', 'NorthEast');
+
+% Add cursors to the plot.
+makedatatip(Hw_meas_actual_Plot, [pole_1_meas; pole_2_meas]);
+
+%%
+% Generate the plot for $\displaystyle{H_{simulate measured}(f)}$ and
+% indicate where the two poles occur.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name', ...
+  ['H(f) Simulate Measured Actual Design']); % Name the figure
+
+Hw_sim_meas_actual_Plot = semilogx(...
+         freq_meas , Hw_sim_meas_actual,'-g');       % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': H_s_i_m_ _m_e_a_s(f)']);
+legend('H_s_i_m_ _m_e_a_s(f)', 'Location', 'NorthEast');
+
+% Add cursors to the plot.
+makedatatip(Hw_sim_meas_actual_Plot, [pole_1_meas; pole_2_meas]);
+
+%%
+% Generate the plot for comparing $\displaystyle{H_{measured}(f)}$,
+% $\displaystyle{H_{simulate measured}(f)}$ and
+% $\displaystyle{H_{actual}(f)}$.
+
+fignum = fignum+1; figObj = figure(fignum);  % Establish a figure number
+set(fignum, 'Name', ...
+    ['H(f) Measured and Actual Design']);    % Name the figure
+
+semilogx( f, Hw_actual,'-b',...
+          freq_meas, Hw_meas_actual,'-m', ...
+          freq_meas, Hw_sim_meas_actual,'-g');       % Generate plot
+grid on;                                     % Turn grid on
+xlabel('Frequency (Hz)');                    % Label the x-axis
+ylabel('Amplitude (dB)');                    % Label the y-axis
+axis([plot_left, plot_right, ...
+      plot_bottom, plot_top]);               % Bound plot
+title(['Figure ',num2str(fignum,'%-2.u'),...
+       ': H_a_c_t_u_a_l(f), H_m_e_a_s(f), and H_s_i_m_ _m_e_a_s(f)']);
+legend('H_a_c_t_u_a_l(f)', 'H_m_e_a_s(f)', ...
+       'H_s_i_m_ _m_e_a_s(f)',...
+       'Location', 'NorthEast');
+
+%%
+% Calculate the percent difference between
+% $\displaystyle{H_{measured}(f)}$, $\displaystyle{H_{simulate
+% measured}(f)}$, and $\displaystyle{H_{actual}(f)}$ actual designs at the
+% two poles.
+
+f0_measured = freq_meas(pole_1_meas);         % Hertz
+f1_measured = freq_meas(pole_2_meas);         % Hertz
+
+diff_0_meas_actual = ...
+    (Hw_meas_actual_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_meas_actual = ...
+    (Hw_meas_actual_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
+
+diff_0_sim_meas_actual = ...
+    (Hw_sim_meas_actual_f0 - Hw_actual_f0)/abs(Hw_actual_f0)*100;
+diff_1_sim_meas_actual = ...
+    (Hw_sim_meas_actual_f1 - Hw_actual_f1)/abs(Hw_actual_f1)*100;
+
+disp(' ');
+disp('The percent difference between MATLAB and Measured Actual');
+disp('designs at the poles:');
+fprintf('    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
+        f0, Hw_actual_f0);
+fprintf('    Actual   Measured H(%+10.4f) = %+8.4f (dB).\n', ...
+        f0_measured, Hw_meas_actual_f0);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_0_meas_actual);
+fprintf('    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
+        f1, Hw_actual_f1);
+fprintf('    Actual   Measured H(%+10.4f) = %+8.4f (dB).\n', ...
+        f1_measured, Hw_meas_actual_f1);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_1_meas_actual);
+
+disp(' ');
+disp('The percent difference between MATLAB and the simulated');
+disp('Measured Actual designs at the poles:');
+fprintf('    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n', ....
+        f0, Hw_actual_f0);
+fprintf('    Simulate Measured H(%+10.4f) = %+8.4f (dB).\n', ...
+        f0_measured, Hw_sim_meas_actual_f0);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_0_sim_meas_actual);
+fprintf('    Actual     MATLAB H(%+10.4f) = %+8.4f (dB).\n', ...
+        f1, Hw_actual_f1);
+fprintf('    Simulate Measured H(%+10.4f) = %+8.4f (dB).\n', ...
+        f1_measured, Hw_sim_meas_actual_f1);
+fprintf('        %% diff = %+8.4f (%%).\n', diff_1_sim_meas_actual);
+
+%% Program execution complete
+%
+
+disp(' ');
+disp('Program execution complete....');
+
+%% MATLAB code listing
+%
+
+##### SOURCE END #####
+--></body></html>

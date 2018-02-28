@@ -1,0 +1,18 @@
+Circuit: * \\samba1\wbuck\dcengr\Desktop\ELEN100Project1-master\Project1 Real Components Schematic.asc
+
+
+Date: Tue Feb 27 17:15:19 2018
+Total elapsed time: 0.090 seconds.
+
+tnom = 27
+temp = 27
+method = trap
+totiter = 0
+traniter = 0
+tranpoints = 0
+accept = 0
+rejected = 0
+matrix size = 4
+fillins = 0
+solver = Normal
+

@@ -1,0 +1,9 @@
+* \\samba1\wbuck\dcengr\Desktop\ELEN100Project1-master\Project1 Real Components Schematic.asc
+R1 N002 N001 1.2K tol=1 pwr=0.1
+R2 N003 N002 1.3K tol=1 pwr=0.1
+C1 N002 0 0.1µ V=4 Irms=1.62 Rser=0.0464862 Lser=0 mfg="KEMET" pn="C0402C104K7PAC" type="X5R"
+C2 N003 0 0.1µ V=4 Irms=1.62 Rser=0.0464862 Lser=0
+V1 N001 0 AC 1
+.ac dec 1000 .1 1Meg
+.backanno
+.end
